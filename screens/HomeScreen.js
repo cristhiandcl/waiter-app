@@ -1,10 +1,13 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { restaurants } from "../restaurants";
+import { useNavigation } from "@react-navigation/core";
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   const restaurantTriggered = (id) => {
-    console.log(id);
+    navigation.navigate("Restaurant", { id });
   };
 
   const renderRestaurants = restaurants.map((restaurant) => (
