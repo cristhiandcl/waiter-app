@@ -3,9 +3,13 @@ import React from "react";
 import { restaurants } from "../restaurants";
 
 const HomeScreen = () => {
+  const restaurantTriggered = (id) => {
+    console.log(id);
+  };
+
   const renderRestaurants = restaurants.map((restaurant) => (
     <TouchableOpacity
-      onPress={() => console.log(restaurant.id)}
+      onPress={() => restaurantTriggered(restaurant.id)}
       key={restaurant.id}
     >
       <Image
@@ -15,6 +19,7 @@ const HomeScreen = () => {
       />
     </TouchableOpacity>
   ));
+
   return (
     <View className="mt-12 items-center">
       <ScrollView className="space-y-6">{renderRestaurants}</ScrollView>
