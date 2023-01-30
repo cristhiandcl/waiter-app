@@ -1,5 +1,6 @@
 export const restaurants = [
   {
+    id: 1,
     name: "Punto Cubano",
     dishes: [
       {
@@ -31,6 +32,7 @@ export const restaurants = [
     image: require("./assets/restaurants/QBano.png"),
   },
   {
+    id: 2,
     name: "Wings and Beer",
     dishes: [
       {
@@ -63,6 +65,7 @@ export const restaurants = [
     image: require("./assets/restaurants/mrwings.jpeg"),
   },
   {
+    id: 3,
     name: "KFC",
     dishes: [
       {

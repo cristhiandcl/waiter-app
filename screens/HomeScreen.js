@@ -4,7 +4,10 @@ import { restaurants } from "../restaurants";
 
 const HomeScreen = () => {
   const renderRestaurants = restaurants.map((restaurant) => (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => console.log(restaurant.id)}
+      key={restaurant.id}
+    >
       <Image
         source={restaurant.image}
         className="h-60 w-60 rounded-lg"
