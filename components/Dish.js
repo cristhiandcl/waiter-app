@@ -10,7 +10,6 @@ import {
 const Dish = ({ dish }) => {
   const dispatch = useDispatch();
   const basketItems = useSelector(getBasketItems);
-  console.log(basketItems);
   const amount = basketItems.filter((item) => item.id === dish.id).length;
 
   const addItemsToBasket = () => {
