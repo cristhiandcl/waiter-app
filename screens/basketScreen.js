@@ -17,8 +17,7 @@ const BasketScreen = () => {
       } else {
         individualItems.length === 0
           ? individualItems.push(items[index])
-          : individualItems.push;
-        items[index - 1];
+          : individualItems.push(items[index - 1]);
         groupAllItems.push(individualItems);
         individualItems = [];
       }
