@@ -50,7 +50,7 @@ const RestaurantScreen = () => {
             className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl"
             onPress={goToBasketScreen}
           >
-            <Text className="text-white font-extrabold">Go to pay</Text>
+            <Text className="text-white font-extrabold">Basket</Text>
           </TouchableOpacity>
           <TouchableOpacity
             className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl"
