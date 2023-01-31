@@ -21,11 +21,7 @@ const RestaurantScreen = () => {
 
   const dishesToRender = restaurant.dishes.map((dish) => (
     <View key={dish.name}>
-      <Dish
-        name={dish.name}
-        description={dish.description}
-        price={dish.price}
-      />
+      <Dish dish={dish} />
     </View>
   ));
 
