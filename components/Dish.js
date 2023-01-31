@@ -9,7 +9,6 @@ import {
 } from "../features/basketSlice";
 
 const Dish = ({ dish }) => {
-  const [amount, setAmount] = useState(0);
   const dispatch = useDispatch();
   const basketItems = useSelector(getBasketItems);
   console.log(basketItems);
@@ -19,7 +18,7 @@ const Dish = ({ dish }) => {
   };
 
   const removeItemsFromBasket = () => {
-    dispatch(removeFromBasket);
+    dispatch(removeFromBasket(dish.id));
   };
 
   return (
