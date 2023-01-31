@@ -22,7 +22,7 @@ export const restaurants = [
         description: "Tomato, Lettuce, House Sauce and Beef",
       },
       {
-        id: 5,
+        id: 4,
         name: "Cordero Sandwich",
         price: 15000,
         description: "Tomato, Lettuce, House Sauce and Cordero",

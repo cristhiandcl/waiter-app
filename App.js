@@ -5,6 +5,7 @@ import RestaurantScreen from "./screens/RestaurantScreen";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import BasketScreen from "./screens/basketScreen";
+import SplitAccountScreen from "./screens/SplitAccountScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -25,6 +26,11 @@ export default function App() {
           <Stack.Screen
             name="Basket"
             component={BasketScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SplitAccount"
+            component={SplitAccountScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
