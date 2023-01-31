@@ -1,5 +1,4 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
 import { MinusCircleIcon, PlusCircleIcon } from "react-native-heroicons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,13 +11,14 @@ const Dish = ({ dish }) => {
   const dispatch = useDispatch();
   const basketItems = useSelector(getBasketItems);
   console.log(basketItems);
+  const amount = basketItems.filter((item) => item.id === dish.id).length;
 
   const addItemsToBasket = () => {
     dispatch(addToBasket(dish));
   };
 
   const removeItemsFromBasket = () => {
-    dispatch(removeFromBasket(dish.id));
+    amount !== 0 && dispatch(removeFromBasket(dish.id));
   };
 
   return (
@@ -35,8 +35,8 @@ const Dish = ({ dish }) => {
             color={basketItems === 0 ? "gray" : "green"}
           />
         </TouchableOpacity>
-        <Text>{basketItems.length}</Text>
-        <TouchableOpacity onPress={() => addItemsToBasket()}>
+        <Text>{amount}</Text>
+        <TouchableOpacity onPress={addItemsToBasket}>
           <PlusCircleIcon size={30} color="green" />
         </TouchableOpacity>
       </View>
