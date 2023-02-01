@@ -19,9 +19,9 @@ const BasketItem = ({ item }) => {
           {item[0].description}
         </Text>
         <Text className="text-red-600 font-extrabold mt-2">
-          {new Intl.NumberFormat("de-DE", {
+          {new Intl.NumberFormat("es-CO", {
             style: "currency",
-            currency: "EUR",
+            currency: "COP",
           }).format(item[0].price)}
         </Text>
       </View>

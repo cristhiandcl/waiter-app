@@ -26,7 +26,12 @@ const Dish = ({ dish }) => {
       <Text className="text-center font-semibold text-green-600">
         {dish.description}
       </Text>
-      <Text className="text-red-600 font-extrabold">{dish.price}</Text>
+      <Text className="text-red-600 font-extrabold">
+        {new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+        }).format(dish.price)}
+      </Text>
       <View className="flex-row items-center space-x-2">
         <TouchableOpacity onPress={removeItemsFromBasket}>
           <MinusCircleIcon
