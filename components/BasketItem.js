@@ -28,9 +28,9 @@ const BasketItem = ({ item }) => {
         </Text>
       </View>
       <View className="flex-row items-center space-x-2">
-        <Text>{item.length}</Text>
+        <Text className="font-bold">{item.length}</Text>
         <TouchableOpacity onPress={removeItemsFromBasket}>
-          <TrashIcon size={30} color="green" />
+          <TrashIcon size={28} color="green" />
         </TouchableOpacity>
       </View>
     </View>
