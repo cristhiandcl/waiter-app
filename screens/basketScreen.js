@@ -15,20 +15,13 @@ import { ChevronRightIcon } from "react-native-heroicons/solid";
 import Tip from "../components/Tip";
 import { getTips } from "../features/tipsSlice";
 
-// const tipvalues = [
-//   { value: 1000, isPressed: false, id: 0 },
-//   { value: 2000, isPressed: false, id: 1 },
-//   { value: 4000, isPressed: false, id: 2 },
-//   { value: "Other", isPressed: false, id: 3 },
-// ];
-
 const BasketScreen = () => {
   const items = useSelector(getBasketItems);
   const total = items.reduce((prev, next) => prev + next.price, 0);
   const restaurant = useSelector(getRestaurant);
   const [groupedItemsInBasket, setGroupItemsInBasket] = useState();
   const tipValues = useSelector(getTips);
-  const tip = tipValues.filter((tip) => tip.isPressed === true)[0].value;
+  const tip = tipValues?.filter((tip) => tip.isPressed === true)[0]?.value || 0;
 
   useMemo(() => {
     let individualItems = [],
@@ -48,7 +41,7 @@ const BasketScreen = () => {
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
 
-  console.log(tip);
+  // console.log(tip);
 
   const renderBasketItems = groupedItemsInBasket?.map((item) => (
     <View>
@@ -70,6 +63,7 @@ const BasketScreen = () => {
               <Image
                 source={restaurant?.image}
                 className="h-12 w-12 rounded-full"
+                style={{ resizeMode: "stretch" }}
               />
               <View>
                 <Text className="font-extrabold text-base">
