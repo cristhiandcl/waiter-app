@@ -41,7 +41,7 @@ const RestaurantScreen = () => {
       <Text className="text-center text-3xl font-extrabold text-green-800 mt-4">
         {restaurant.name}
       </Text>
-      <View className="mt-6 h-3/4 py-3">
+      <View className={`mt-6 ${itemsOnbasket > 0 && "h-3/4"} py-3`}>
         <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
           {dishesToRender}
         </ScrollView>
@@ -50,9 +50,9 @@ const RestaurantScreen = () => {
         <View className="flex-row mt-8">
           <TouchableOpacity
             onPress={goToBasketScreen}
-            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-2 justify-center"
+            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-4 justify-center"
           >
-            <View className="border-white border p-2">
+            <View className="border-white border rounded p-2">
               <Text className="text-white font-extrabold">{itemsOnbasket}</Text>
             </View>
             <Text className="text-white font-extrabold">Basket</Text>

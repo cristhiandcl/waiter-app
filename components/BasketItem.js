@@ -10,6 +10,7 @@ const BasketItem = ({ item }) => {
   const removeItemsFromBasket = () => {
     dispatch(removeFromBasket(item[0].id));
   };
+
   return (
     <View className="flex-row justify-center items-baseline">
       <View className="w-3/4">
@@ -17,7 +18,12 @@ const BasketItem = ({ item }) => {
         <Text className="font-semibold text-green-600">
           {item[0].description}
         </Text>
-        <Text className="text-red-600 font-extrabold">{item[0].price}</Text>
+        <Text className="text-red-600 font-extrabold mt-2">
+          {new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR",
+          }).format(item[0].price)}
+        </Text>
       </View>
       <View className="flex-row items-center space-x-2">
         <Text>{item.length}</Text>
