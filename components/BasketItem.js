@@ -22,7 +22,9 @@ const BasketItem = ({ item }) => {
           {new Intl.NumberFormat("es-CO", {
             style: "currency",
             currency: "COP",
-          }).format(item[0].price)}
+          })
+            .format(item[0].price)
+            .replace(",00", "")}
         </Text>
       </View>
       <View className="flex-row items-center space-x-2">

@@ -30,7 +30,9 @@ const Dish = ({ dish }) => {
         {new Intl.NumberFormat("es-CO", {
           style: "currency",
           currency: "COP",
-        }).format(dish.price)}
+        })
+          .format(dish.price)
+          .replace(",00", "")}
       </Text>
       <View className="flex-row items-center space-x-2">
         <TouchableOpacity onPress={removeItemsFromBasket}>

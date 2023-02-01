@@ -5,24 +5,38 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { restaurants } from "../restaurants";
 import Dish from "../components/Dish";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getBasketItems } from "../features/basketSlice";
+import { setRestaurant } from "../features/restaurantSlice";
+import { setTips } from "../features/tipsSlice";
 
 const RestaurantScreen = () => {
   const {
     params: { id },
   } = useRoute();
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   const itemsOnbasket = useSelector(getBasketItems).length;
 
   const restaurant = restaurants.filter(
     (restaurant) => restaurant.id === id
   )[0];
+
+  useEffect(() => {
+    dispatch(setRestaurant(restaurant));
+    dispatch(
+      setTips([
+        { value: 1000, isPressed: false, id: 0 },
+        { value: 2000, isPressed: false, id: 1 },
+        { value: 4000, isPressed: false, id: 2 },
+        { value: "Other", isPressed: false, id: 3 },
+      ])
+    );
+  }, []);
 
   const dishesToRender = restaurant.dishes.map((dish) => (
     <View key={dish.name}>
