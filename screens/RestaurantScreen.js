@@ -38,22 +38,27 @@ const RestaurantScreen = () => {
 
   return (
     <SafeAreaView className="h-full">
-      <Text className="text-center text-3xl font-extrabold text-green-800">
+      <Text className="text-center text-3xl font-extrabold text-green-800 mt-4">
         {restaurant.name}
       </Text>
-      <View className="my-1">
-        <ScrollView className="space-y-6 py-4">{dishesToRender}</ScrollView>
+      <View className="mt-6 h-3/4 py-3">
+        <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
+          {dishesToRender}
+        </ScrollView>
       </View>
       {itemsOnbasket > 0 && (
-        <View className="flex-row">
+        <View className="flex-row mt-8">
           <TouchableOpacity
-            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl"
             onPress={goToBasketScreen}
+            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-2 justify-center"
           >
+            <View className="border-white border p-2">
+              <Text className="text-white font-extrabold">{itemsOnbasket}</Text>
+            </View>
             <Text className="text-white font-extrabold">Basket</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl"
+            className="items-center w-2/5 mx-auto bg-green-800 rounded-xl justify-center"
             onPress={goToSplitAccountScreen}
           >
             <Text className="text-white font-extrabold">Split account</Text>

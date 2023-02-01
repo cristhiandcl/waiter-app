@@ -27,19 +27,19 @@ const BasketScreen = () => {
   }, [items]);
 
   const renderBasketItems = groupedItemsInBasket?.map((item) => (
-    <View>
+    <View key={item.id}>
       <BasketItem item={item} />
     </View>
   ));
 
   console.log(groupedItemsInBasket);
   return (
-    <SafeAreaView className="">
-      <Text className="text-center font-extrabold text-3xl text-green-800 mb-10">
+    <View className="">
+      <Text className="text-center font-extrabold text-3xl text-green-800 mb-10 mt-4">
         Basket
       </Text>
       <View className="space-y-6">{renderBasketItems}</View>
-    </SafeAreaView>
+    </View>
   );
 };
 
