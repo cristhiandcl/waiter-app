@@ -10,7 +10,7 @@ import { useNavigation, useRoute } from "@react-navigation/core";
 import { restaurants } from "../restaurants";
 import Dish from "../components/Dish";
 import { useDispatch, useSelector } from "react-redux";
-import { getBasketItems } from "../features/basketSlice";
+import { emptyBasket, getBasketItems } from "../features/basketSlice";
 import { setRestaurant } from "../features/restaurantSlice";
 import { setTips } from "../features/tipsSlice";
 
@@ -28,6 +28,7 @@ const RestaurantScreen = () => {
 
   useEffect(() => {
     dispatch(setRestaurant(restaurant));
+    dispatch(emptyBasket());
     dispatch(
       setTips([
         { value: 1000, isPressed: false, id: 0 },

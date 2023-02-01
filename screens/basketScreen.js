@@ -1,10 +1,11 @@
 import {
   View,
   Text,
-  SafeAreaView,
+  Modal,
   TouchableOpacity,
   ScrollView,
   Image,
+  Pressable,
 } from "react-native";
 import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
@@ -22,6 +23,7 @@ const BasketScreen = () => {
   const [groupedItemsInBasket, setGroupItemsInBasket] = useState();
   const tipValues = useSelector(getTips);
   const tip = tipValues?.filter((tip) => tip.isPressed === true)[0]?.value || 0;
+  const [modalVisible, setModalVisible] = useState(false);
 
   useMemo(() => {
     let individualItems = [],
@@ -41,13 +43,15 @@ const BasketScreen = () => {
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
 
-  // console.log(tip);
-
   const renderBasketItems = groupedItemsInBasket?.map((item) => (
     <View>
       <BasketItem item={item} key={item.name} />
     </View>
   ));
+
+  const showBasketItems = () => {
+    setModalVisible(true);
+  };
 
   console.log(groupedItemsInBasket);
   return (
@@ -57,8 +61,10 @@ const BasketScreen = () => {
           Order
         </Text>
         <ScrollView className="shadow-2xls bg-white shadow-2xl py-4">
-          {/* <View className="space-y-6">{renderBasketItems}</View> */}
-          <TouchableOpacity className="flex-row items-center mx-6">
+          <TouchableOpacity
+            className="flex-row items-center mx-6"
+            onPress={showBasketItems}
+          >
             <View className="flex-1 flex-row items-center space-x-3">
               <Image
                 source={restaurant?.image}
@@ -115,6 +121,30 @@ const BasketScreen = () => {
               </Text>
             </View>
           </View>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View className="h-96 absolute bottom-0 w-screen bg-green-200 rounded-t-3xl">
+              {/* <View className="flex-1 items-center justify-center"> */}
+              <Text className="font-extrabold text-2xl my-6 ml-4 border border-gray-400">
+                {restaurant?.name}
+              </Text>
+              <ScrollView className="space-y-4">{renderBasketItems}</ScrollView>
+              <Pressable
+                onPress={() => setModalVisible(false)}
+                className="border p-4 my-6 rounded w-1/5 mx-auto items-center"
+              >
+                <Text>Close</Text>
+              </Pressable>
+              {/* </View> */}
+            </View>
+          </Modal>
         </ScrollView>
       </View>
       <View className="flex-row justify-between items-center py-6 mx-6">
@@ -129,7 +159,10 @@ const BasketScreen = () => {
               .replace(",00", "")}
           </Text>
         </View>
-        <TouchableOpacity className="bg-green-600 px-12 py-4 rounded-3xl">
+        <TouchableOpacity
+          className="bg-green-600 px-12 py-4 rounded-3xl"
+          // onPress={() }
+        >
           <Text className="text-white font-extrabold ">Create Order</Text>
         </TouchableOpacity>
       </View>

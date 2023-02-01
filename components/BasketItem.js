@@ -14,16 +14,16 @@ const BasketItem = ({ item }) => {
   return (
     <View className="flex-row justify-center items-baseline">
       <View className="w-3/4">
-        <Text className="font-extrabold text-xl">{item[0].name}</Text>
-        <Text className="font-semibold text-green-600">
+        <Text className="font-extrabold text-lg">{item[0].name}</Text>
+        <Text className="font-semibold text-green-600 text-xs">
           {item[0].description}
         </Text>
-        <Text className="text-red-600 font-extrabold mt-2">
+        <Text className="text-red-600 font-extrabold mt-2 text-xs">
           {new Intl.NumberFormat("es-CO", {
             style: "currency",
             currency: "COP",
           })
-            .format(item[0].price)
+            .format(item[0].price * item.length)
             .replace(",00", "")}
         </Text>
       </View>

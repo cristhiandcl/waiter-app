@@ -19,11 +19,15 @@ export const basketSlice = createSlice({
       mirror.splice(toRemove, 1);
       state.items = [...mirror];
     },
+    emptyBasket: (state) => {
+      state.items = [];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addToBasket, removeFromBasket } = basketSlice.actions;
+export const { addToBasket, removeFromBasket, emptyBasket } =
+  basketSlice.actions;
 
 export const getBasketItems = (state) => state.basket.items;
 
