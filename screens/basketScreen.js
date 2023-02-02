@@ -6,13 +6,15 @@ import {
   ScrollView,
   Image,
   Pressable,
+  TextInput,
+  KeyboardAvoidingView,
 } from "react-native";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { getBasketItems } from "../features/basketSlice";
 import { getRestaurant } from "../features/restaurantSlice";
 import BasketItem from "../components/BasketItem";
-import { ChevronRightIcon } from "react-native-heroicons/solid";
+import { ChevronRightIcon, XCircleIcon } from "react-native-heroicons/solid";
 import Tip from "../components/Tip";
 import { getTips } from "../features/tipsSlice";
 
@@ -23,7 +25,14 @@ const BasketScreen = () => {
   const [groupedItemsInBasket, setGroupItemsInBasket] = useState();
   const tipValues = useSelector(getTips);
   const tip = tipValues?.filter((tip) => tip.isPressed === true)[0]?.value || 0;
-  const [modalVisible, setModalVisible] = useState(false);
+  const [otherTip, setOtherTip] = useState(0);
+  const [modal1Visible, setModal1Visible] = useState(false);
+  const [modal2Visible, setModal2Visible] = useState(false);
+  const [val, onChangeNumb] = useState("$0");
+
+  useEffect(() => {
+    tip === "Other" && setModal2Visible(true);
+  }, [tip]);
 
   useMemo(() => {
     let individualItems = [],
@@ -44,16 +53,31 @@ const BasketScreen = () => {
   }, [items]);
 
   const renderBasketItems = groupedItemsInBasket?.map((item) => (
-    <View>
+    <View key={item.name}>
       <BasketItem item={item} key={item.name} />
     </View>
   ));
 
+  const realTip = tip === "Other" ? otherTip : tip;
+  console.log(realTip);
   const showBasketItems = () => {
-    setModalVisible(true);
+    setModal1Visible(true);
   };
 
-  console.log(groupedItemsInBasket);
+  const onChangeNumber = (value) => {
+    onChangeNumb(value);
+  };
+
+  const addTip = () => {
+    setOtherTip(val);
+    setModal2Visible(false);
+  };
+
+  const noTip = () => {
+    setOtherTip(0);
+    setModal2Visible(false);
+  };
+
   return (
     <View className="h-full">
       <View className="flex-1">
@@ -116,7 +140,7 @@ const BasketScreen = () => {
                   style: "currency",
                   currency: "COP",
                 })
-                  .format(tip)
+                  .format(tip === "Other" ? otherTip : tip)
                   .replace(",00", "")}
               </Text>
             </View>
@@ -124,26 +148,66 @@ const BasketScreen = () => {
           <Modal
             animationType="slide"
             transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setModalVisible(!modalVisible);
-            }}
+            visible={modal1Visible}
           >
             <View className="h-96 absolute bottom-0 w-screen bg-green-200 rounded-t-3xl">
-              {/* <View className="flex-1 items-center justify-center"> */}
-              <Text className="font-extrabold text-2xl my-6 ml-4 border border-gray-400">
+              <Text className="font-extrabold text-2xl mb-5 mt-6 ml-4 border border-gray-400">
                 {restaurant?.name}
               </Text>
-              <ScrollView className="space-y-4">{renderBasketItems}</ScrollView>
+              <ScrollView className="space-y-4 mb-8">
+                {renderBasketItems}
+              </ScrollView>
               <Pressable
-                onPress={() => setModalVisible(false)}
-                className="border p-4 my-6 rounded w-1/5 mx-auto items-center"
+                onPress={() => setModal1Visible(false)}
+                className="absolute right-4 top-4"
               >
-                <Text>Close</Text>
+                <XCircleIcon size={50} color="green" />
               </Pressable>
-              {/* </View> */}
             </View>
+          </Modal>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modal2Visible}
+          >
+            {/* <KeyboardAvoidingView behavior="padding" className="relative"> */}
+            <View className="h-96 absolute bottom-0 w-screen bg-green-200 rounded-t-3xl">
+              <Text className="font-extrabold text-3xl mb-10 mt-6 ml-4 border border-gray-400">
+                Enter Amount
+              </Text>
+              <TextInput
+                caretHidden={true}
+                autoFocus={true}
+                className="w-2/4 mx-auto font-extrabold text-4xl text-center"
+                value={val}
+                onChangeText={onChangeNumber}
+                keyboardType="numeric"
+              />
+              <View className="items-center space-y-4 mt-6">
+                <Pressable
+                  className="bg-green-600 p-4 w-3/5 rounded-3xl items-center"
+                  onPress={addTip}
+                >
+                  <Text className="text-white font-extrabold">Add Tip</Text>
+                </Pressable>
+                <Pressable
+                  className="bg-white p-4 w-3/5 rounded-3xl items-center"
+                  onPress={noTip}
+                >
+                  <Text className="text-green-600 font-extrabold">
+                    Without Tip
+                  </Text>
+                </Pressable>
+              </View>
+
+              <Pressable
+                onPress={() => setModal2Visible(false)}
+                className="absolute right-4 top-4"
+              >
+                <XCircleIcon size={50} color="green" />
+              </Pressable>
+            </View>
+            {/* </KeyboardAvoidingView> */}
           </Modal>
         </ScrollView>
       </View>
@@ -155,7 +219,7 @@ const BasketScreen = () => {
               style: "currency",
               currency: "COP",
             })
-              .format(total + tip)
+              .format(total + (tip === "Other" ? parseInt(otherTip) : tip))
               .replace(",00", "")}
           </Text>
         </View>
