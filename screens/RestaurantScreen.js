@@ -23,6 +23,7 @@ const RestaurantScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const itemsOnbasket = useSelector(getBasketItems).length;
+  const items = useSelector(getBasketItems);
 
   const restaurant = restaurants.filter(
     (restaurant) => restaurant.id === id
@@ -50,7 +51,7 @@ const RestaurantScreen = () => {
   const goToBasketScreen = () => {
     // navigation.navigate("Basket");
     navigation.navigate("Orders");
-    dispatch(addOrder({ order: itemsOnbasket, id: uuid.v4() }));
+    dispatch(addOrder({ order: items, id: uuid.v4() }));
     dispatch(emptyBasket());
   };
 

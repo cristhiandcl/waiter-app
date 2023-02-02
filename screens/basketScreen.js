@@ -18,10 +18,17 @@ import { ChevronRightIcon, XCircleIcon } from "react-native-heroicons/solid";
 import Tip from "../components/Tip";
 import { getTips } from "../features/tipsSlice";
 import uuid from "react-native-uuid";
+import { useRoute } from "@react-navigation/native";
+import { getOrders } from "../features/ordersSlice";
 
 const BasketScreen = () => {
-  const items = useSelector(getBasketItems);
-  const total = items.reduce((prev, next) => prev + next.price, 0);
+  const {
+    params: { id },
+  } = useRoute();
+
+  const items = useSelector(getOrders)?.filter((order) => order.id === id)[0]
+    ?.order;
+  const total = items?.reduce((prev, next) => prev + next.price, 0);
   const restaurant = useSelector(getRestaurant);
   const [groupedItemsInBasket, setGroupItemsInBasket] = useState();
   const tipValues = useSelector(getTips);
@@ -39,7 +46,7 @@ const BasketScreen = () => {
   useMemo(() => {
     let individualItems = [],
       groupAllItems = [];
-    items.map((_, index) => {
+    items?.map((_, index) => {
       if (items[index]?.id === items[index + 1]?.id) {
         individualItems.push(items[index]);
       } else {
@@ -101,7 +108,7 @@ const BasketScreen = () => {
                 <Text className="font-extrabold text-base">
                   {restaurant?.name}
                 </Text>
-                <Text className="text-xs">{items.length} Products</Text>
+                <Text className="text-xs">{items?.length} Products</Text>
               </View>
             </View>
             <ChevronRightIcon color="green" />
