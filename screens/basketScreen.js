@@ -28,11 +28,11 @@ const BasketScreen = () => {
   const [otherTip, setOtherTip] = useState(0);
   const [modal1Visible, setModal1Visible] = useState(false);
   const [modal2Visible, setModal2Visible] = useState(false);
-  const [val, onChangeNumb] = useState("0");
+  const [input, onChangeInput] = useState(0);
 
   useEffect(() => {
     tip === "Other" && setModal2Visible(true);
-    tip === "Other" && onChangeNumb("0");
+    tip === "Other" && onChangeInput(0);
   }, [tip]);
 
   useMemo(() => {
@@ -66,11 +66,11 @@ const BasketScreen = () => {
   };
 
   const onChangeNumber = (value) => {
-    onChangeNumb(value);
+    onChangeInput(value);
   };
 
   const addTip = () => {
-    setOtherTip(val);
+    setOtherTip(input);
     setModal2Visible(false);
   };
 
@@ -179,8 +179,10 @@ const BasketScreen = () => {
                 <TextInput
                   caretHidden={true}
                   autoFocus={true}
+                  placeholder="0"
+                  placeholderTextColor="black"
                   className="w-2/4 mx-auto font-extrabold text-4xl text-center"
-                  value={val}
+                  value={input}
                   onChangeText={onChangeNumber}
                   keyboardType="numeric"
                 />
