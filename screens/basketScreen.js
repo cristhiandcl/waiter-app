@@ -28,10 +28,11 @@ const BasketScreen = () => {
   const [otherTip, setOtherTip] = useState(0);
   const [modal1Visible, setModal1Visible] = useState(false);
   const [modal2Visible, setModal2Visible] = useState(false);
-  const [val, onChangeNumb] = useState("$0");
+  const [val, onChangeNumb] = useState("0");
 
   useEffect(() => {
     tip === "Other" && setModal2Visible(true);
+    tip === "Other" && onChangeNumb("0");
   }, [tip]);
 
   useMemo(() => {
@@ -170,44 +171,44 @@ const BasketScreen = () => {
             transparent={true}
             visible={modal2Visible}
           >
-            {/* <KeyboardAvoidingView behavior="padding" className="relative"> */}
-            <View className="h-96 absolute bottom-0 w-screen bg-green-200 rounded-t-3xl">
-              <Text className="font-extrabold text-3xl mb-10 mt-6 ml-4 border border-gray-400">
-                Enter Amount
-              </Text>
-              <TextInput
-                caretHidden={true}
-                autoFocus={true}
-                className="w-2/4 mx-auto font-extrabold text-4xl text-center"
-                value={val}
-                onChangeText={onChangeNumber}
-                keyboardType="numeric"
-              />
-              <View className="items-center space-y-4 mt-6">
+            <KeyboardAvoidingView behavior="padding" className="h-full">
+              <View className="84 w-screen bg-green-200 rounded-t-3xl mt-auto pb-10">
+                <Text className="font-extrabold text-3xl mb-10 mt-6 ml-4 border border-gray-400">
+                  Enter Amount
+                </Text>
+                <TextInput
+                  caretHidden={true}
+                  autoFocus={true}
+                  className="w-2/4 mx-auto font-extrabold text-4xl text-center"
+                  value={val}
+                  onChangeText={onChangeNumber}
+                  keyboardType="numeric"
+                />
+                <View className="items-center space-y-4 mt-6">
+                  <TouchableOpacity
+                    className="bg-green-600 p-4 w-3/5 rounded-3xl items-center"
+                    onPress={addTip}
+                  >
+                    <Text className="text-white font-extrabold">Add Tip</Text>
+                  </TouchableOpacity>
+                  <Pressable
+                    className="bg-white p-4 w-3/5 rounded-3xl items-center"
+                    onPress={noTip}
+                  >
+                    <Text className="text-green-600 font-extrabold">
+                      Without Tip
+                    </Text>
+                  </Pressable>
+                </View>
+
                 <Pressable
-                  className="bg-green-600 p-4 w-3/5 rounded-3xl items-center"
-                  onPress={addTip}
+                  onPress={() => setModal2Visible(false)}
+                  className="absolute right-4 top-4"
                 >
-                  <Text className="text-white font-extrabold">Add Tip</Text>
-                </Pressable>
-                <Pressable
-                  className="bg-white p-4 w-3/5 rounded-3xl items-center"
-                  onPress={noTip}
-                >
-                  <Text className="text-green-600 font-extrabold">
-                    Without Tip
-                  </Text>
+                  <XCircleIcon size={50} color="green" />
                 </Pressable>
               </View>
-
-              <Pressable
-                onPress={() => setModal2Visible(false)}
-                className="absolute right-4 top-4"
-              >
-                <XCircleIcon size={50} color="green" />
-              </Pressable>
-            </View>
-            {/* </KeyboardAvoidingView> */}
+            </KeyboardAvoidingView>
           </Modal>
         </ScrollView>
       </View>
