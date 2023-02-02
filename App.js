@@ -32,7 +32,7 @@ export default function App() {
           <Stack.Screen
             name="SplitAccount"
             component={SplitAccountScreen}
-            options={{ headerShown: false }}
+            options={{ headerShown: false, presentation: "modal" }}
           />
           <Stack.Screen
             name="Orders"

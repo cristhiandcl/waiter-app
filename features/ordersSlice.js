@@ -13,7 +13,7 @@ export const ordersSlice = createSlice({
     },
     removeOrder: (state, action) => {
       const removeItem = state.items.filter(
-        (item) => item.id === action.payload
+        (item) => item.id !== action.payload
       );
       state.items = [...removeItem];
     },

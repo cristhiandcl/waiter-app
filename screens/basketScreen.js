@@ -8,24 +8,26 @@ import {
   Pressable,
   TextInput,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
-import { getBasketItems } from "../features/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { getRestaurant } from "../features/restaurantSlice";
 import BasketItem from "../components/BasketItem";
 import { ChevronRightIcon, XCircleIcon } from "react-native-heroicons/solid";
 import Tip from "../components/Tip";
 import { getTips } from "../features/tipsSlice";
 import uuid from "react-native-uuid";
-import { useRoute } from "@react-navigation/native";
-import { getOrders } from "../features/ordersSlice";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { getOrders, removeOrder } from "../features/ordersSlice";
+import { emptySplits, getSplits } from "../features/splitsSlice";
 
 const BasketScreen = () => {
   const {
     params: { id },
   } = useRoute();
-
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const items = useSelector(getOrders)?.filter((order) => order.id === id)[0]
     ?.order;
   const total = items?.reduce((prev, next) => prev + next.price, 0);
@@ -42,6 +44,9 @@ const BasketScreen = () => {
     tip === "Other" && setModal2Visible(true);
     tip === "Other" && onChangeInput(0);
   }, [tip]);
+
+  const splits = useSelector(getSplits);
+  console.log("splitsBasket", splits);
 
   useMemo(() => {
     let individualItems = [],
@@ -61,14 +66,28 @@ const BasketScreen = () => {
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
 
+  console.log(items);
+
+  const renderSplits = splits?.map((split, index) => (
+    <View className="flex-row space-y-1">
+      <Text className="flex-1">Split {index + 1}</Text>
+      <Text>
+        {new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+        })
+          .format(split.reduce((prev, item) => prev + item.price, 0))
+          .replace(",00", "")}
+      </Text>
+    </View>
+  ));
+
   const renderBasketItems = groupedItemsInBasket?.map((item) => (
     <View key={uuid.v4()}>
       <BasketItem item={item} />
     </View>
   ));
 
-  const realTip = tip === "Other" ? otherTip : tip;
-  console.log(realTip);
   const showBasketItems = () => {
     setModal1Visible(true);
   };
@@ -87,6 +106,16 @@ const BasketScreen = () => {
     setModal2Visible(false);
   };
 
+  const goTosplitScreen = () => {
+    dispatch(emptySplits());
+    navigation.navigate("SplitAccount", { id });
+  };
+
+  const sendOrder = () => {
+    dispatch(removeOrder(id));
+    Alert.alert("Order", "Order Finished Successfully");
+    navigation.goBack();
+  };
   return (
     <View className="h-full">
       <View className="flex-1">
@@ -142,6 +171,7 @@ const BasketScreen = () => {
                   .replace(",00", "")}
               </Text>
             </View>
+            <View>{renderSplits}</View>
             <View className="flex-row">
               <Text className="flex-1">Tip</Text>
               <Text>
@@ -155,8 +185,11 @@ const BasketScreen = () => {
             </View>
           </View>
           <View className="py-10 items-center border-t mx-6 border-gray-300 mt-4">
-            <TouchableOpacity className="p-4 w-2/4 bg-gray-200 rounded-2xl">
-              <Text className="text-center font-extrabold">Split Account</Text>
+            <TouchableOpacity
+              className="p-4 w-2/4 bg-gray-200 rounded-2xl"
+              onPress={goTosplitScreen}
+            >
+              <Text className="text-center font-extrabold">Split Order</Text>
             </TouchableOpacity>
           </View>
           <Modal
@@ -241,9 +274,9 @@ const BasketScreen = () => {
         </View>
         <TouchableOpacity
           className="bg-green-600 px-12 py-4 rounded-3xl"
-          // onPress={() }
+          onPress={sendOrder}
         >
-          <Text className="text-white font-extrabold ">Create Order</Text>
+          <Text className="text-white font-extrabold ">Finish Order</Text>
         </TouchableOpacity>
       </View>
     </View>

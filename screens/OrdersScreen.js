@@ -11,6 +11,8 @@ import { getOrders } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
 import { setTips } from "../features/tipsSlice";
+import { emptySplits } from "../features/splitsSlice";
+import { ArrowLeftCircleIcon } from "react-native-heroicons/solid";
 
 const OrdersScreen = () => {
   const navigation = useNavigation();
@@ -26,6 +28,7 @@ const OrdersScreen = () => {
         { value: "Other", isPressed: false, id: 3 },
       ])
     );
+    dispatch(emptySplits());
     navigation.navigate("Basket", { id });
   };
 
@@ -42,11 +45,25 @@ const OrdersScreen = () => {
   ));
 
   return (
-    <SafeAreaView className="h-full">
-      <Text className="font-extrabold text-3xl text-center text-green-800 mb-8">
+    <SafeAreaView className="h-full relative">
+      <Text className="font-extrabold text-4xl text-center text-green-800 mb-8 mt-4">
         Orders
       </Text>
-      <ScrollView className="space-y-8">{renderOrders}</ScrollView>
+      <TouchableOpacity
+        onPress={navigation.goBack}
+        className="absolute top-11 left-4"
+      >
+        <ArrowLeftCircleIcon size={50} color="green" />
+      </TouchableOpacity>
+      {orders.length === 0 ? (
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-5xl font-extrabold text-center w-3/5">
+            There are no Orders left
+          </Text>
+        </View>
+      ) : (
+        <ScrollView className="space-y-8">{renderOrders}</ScrollView>
+      )}
     </SafeAreaView>
   );
 };

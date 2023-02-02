@@ -31,7 +31,6 @@ const RestaurantScreen = () => {
 
   useEffect(() => {
     dispatch(setRestaurant(restaurant));
-    // dispatch(emptyBasket());
     dispatch(
       setTips([
         { value: 1000, isPressed: true, id: 0 },
