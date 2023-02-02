@@ -6,17 +6,26 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
+import { setTips } from "../features/tipsSlice";
 
 const OrdersScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const orders = useSelector(getOrders);
-  console.log(orders);
 
   const sendToBasket = (id) => {
+    dispatch(
+      setTips([
+        { value: 1000, isPressed: true, id: 0 },
+        { value: 2000, isPressed: false, id: 1 },
+        { value: 4000, isPressed: false, id: 2 },
+        { value: "Other", isPressed: false, id: 3 },
+      ])
+    );
     navigation.navigate("Basket", { id });
   };
 

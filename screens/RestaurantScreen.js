@@ -34,7 +34,7 @@ const RestaurantScreen = () => {
     // dispatch(emptyBasket());
     dispatch(
       setTips([
-        { value: 1000, isPressed: false, id: 0 },
+        { value: 1000, isPressed: true, id: 0 },
         { value: 2000, isPressed: false, id: 1 },
         { value: 4000, isPressed: false, id: 2 },
         { value: "Other", isPressed: false, id: 3 },
@@ -48,14 +48,11 @@ const RestaurantScreen = () => {
     </View>
   ));
 
-  const goToBasketScreen = () => {
-    // navigation.navigate("Basket");
+  const goToOrdersScreen = () => {
     navigation.navigate("Orders");
     dispatch(addOrder({ order: items, id: uuid.v4() }));
     dispatch(emptyBasket());
   };
-
-  const goToSplitAccountScreen = () => {};
 
   return (
     <SafeAreaView className="h-full">
@@ -70,7 +67,7 @@ const RestaurantScreen = () => {
       {itemsOnbasket > 0 && (
         <View className="mt-8">
           <TouchableOpacity
-            onPress={goToBasketScreen}
+            onPress={goToOrdersScreen}
             className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-3 justify-center"
           >
             <View className="bg-green-600 rounded p-2">
@@ -78,12 +75,6 @@ const RestaurantScreen = () => {
             </View>
             <Text className="text-white font-extrabold">Create Order</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity
-            className="items-center w-2/5 mx-auto bg-white rounded-xl justify-center"
-            onPress={goToSplitAccountScreen}
-          >
-            <Text className="text-green-800 font-extrabold">Split account</Text>
-          </TouchableOpacity> */}
         </View>
       )}
     </SafeAreaView>
