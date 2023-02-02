@@ -13,8 +13,8 @@ const BasketItem = ({ item }) => {
 
   return (
     <View className="flex-row justify-around items-center">
-      <View className="">
-        <Text className="font-extrabold text-lg flex-1">{item[0].name}</Text>
+      <View className="w-2/4">
+        <Text className="font-extrabold text-lg ">{item[0].name}</Text>
         <Text className="font-semibold text-green-600 text-xs">
           {item[0].description}
         </Text>
