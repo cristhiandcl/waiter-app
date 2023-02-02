@@ -9,8 +9,6 @@ const Tip = ({ tip }) => {
   const dispatch = useDispatch();
 
   const pressed = () => {
-    // typeof tip.value === "number"
-    // ?
     dispatch(
       setTips(
         tips.map((tipD) =>
@@ -20,15 +18,6 @@ const Tip = ({ tip }) => {
         )
       )
     );
-    // : dispatch(
-    //     setTips(
-    //       tips.map((tipD) =>
-    //         tipD.id === tip.id
-    //           ? { ...tipD, isActive: true }
-    //           : { ...tipD, isPressed: false }
-    //       )
-    //     )
-    //   );
   };
 
   return (

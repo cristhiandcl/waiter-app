@@ -17,6 +17,7 @@ import BasketItem from "../components/BasketItem";
 import { ChevronRightIcon, XCircleIcon } from "react-native-heroicons/solid";
 import Tip from "../components/Tip";
 import { getTips } from "../features/tipsSlice";
+import uuid from "react-native-uuid";
 
 const BasketScreen = () => {
   const items = useSelector(getBasketItems);
@@ -54,8 +55,8 @@ const BasketScreen = () => {
   }, [items]);
 
   const renderBasketItems = groupedItemsInBasket?.map((item) => (
-    <View key={item.name}>
-      <BasketItem item={item} key={item.name} />
+    <View key={uuid.v4()}>
+      <BasketItem item={item} />
     </View>
   ));
 

@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { emptyBasket, getBasketItems } from "../features/basketSlice";
 import { setRestaurant } from "../features/restaurantSlice";
 import { setTips } from "../features/tipsSlice";
+import { addOrder } from "../features/ordersSlice";
+import uuid from "react-native-uuid";
 
 const RestaurantScreen = () => {
   const {
@@ -28,7 +30,7 @@ const RestaurantScreen = () => {
 
   useEffect(() => {
     dispatch(setRestaurant(restaurant));
-    dispatch(emptyBasket());
+    // dispatch(emptyBasket());
     dispatch(
       setTips([
         { value: 1000, isPressed: false, id: 0 },
@@ -46,7 +48,10 @@ const RestaurantScreen = () => {
   ));
 
   const goToBasketScreen = () => {
-    navigation.navigate("Basket");
+    // navigation.navigate("Basket");
+    navigation.navigate("Orders");
+    dispatch(addOrder({ order: itemsOnbasket, id: uuid.v4() }));
+    dispatch(emptyBasket());
   };
 
   const goToSplitAccountScreen = () => {};
@@ -62,22 +67,22 @@ const RestaurantScreen = () => {
         </ScrollView>
       </View>
       {itemsOnbasket > 0 && (
-        <View className="flex-row mt-8">
+        <View className="mt-8">
           <TouchableOpacity
             onPress={goToBasketScreen}
-            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-4 justify-center"
+            className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-3 justify-center"
           >
-            <View className="border-white border rounded p-2">
+            <View className="bg-green-600 rounded p-2">
               <Text className="text-white font-extrabold">{itemsOnbasket}</Text>
             </View>
-            <Text className="text-white font-extrabold">Basket</Text>
+            <Text className="text-white font-extrabold">Create Order</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            className="items-center w-2/5 mx-auto bg-green-800 rounded-xl justify-center"
+          {/* <TouchableOpacity
+            className="items-center w-2/5 mx-auto bg-white rounded-xl justify-center"
             onPress={goToSplitAccountScreen}
           >
-            <Text className="text-white font-extrabold">Split account</Text>
-          </TouchableOpacity>
+            <Text className="text-green-800 font-extrabold">Split account</Text>
+          </TouchableOpacity> */}
         </View>
       )}
     </SafeAreaView>
