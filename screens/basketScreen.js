@@ -154,6 +154,11 @@ const BasketScreen = () => {
               </Text>
             </View>
           </View>
+          <View className="py-10 items-center border-t mx-6 border-gray-300 mt-4">
+            <TouchableOpacity className="p-4 w-2/4 bg-gray-200 rounded-2xl">
+              <Text className="text-center font-extrabold">Split Account</Text>
+            </TouchableOpacity>
+          </View>
           <Modal
             animationType="slide"
             transparent={true}
