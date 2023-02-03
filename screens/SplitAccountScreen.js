@@ -68,12 +68,22 @@ const SplitAccountScreen = () => {
       <Text className="font-extrabold text-3xl text-center my-4">
         Split Order
       </Text>
-      <ScrollView
-        className="mx-4 space-y-4 my-4"
-        showsVerticalScrollIndicator={false}
-      >
-        {renderItems}
-      </ScrollView>
+      {order.length === 0 ? (
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-5xl font-extrabold text-center w-3/5">
+            There are no Items left
+          </Text>
+          <View className="flex-row items-center space-x-1">
+            <Text className="font-bold">Press </Text>
+            <View className="bg-gray-300 rounded-lg p-2 ">
+              <Text className="font-bold">Add Split</Text>
+            </View>
+            <Text className="font-bold">to finish</Text>
+          </View>
+        </View>
+      ) : (
+        <ScrollView className="space-y-8">{renderItems}</ScrollView>
+      )}
       <TouchableOpacity className="p-6 bg-gray-300 mx-8 my-10 rounded-xl">
         <Text className="text-center font-extrabold text-xl" onPress={addSplit}>
           Add Split
