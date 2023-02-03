@@ -73,7 +73,7 @@ const SplitAccountScreen = () => {
           <Text className="text-5xl font-extrabold text-center w-3/5">
             There are no Items left
           </Text>
-          <View className="flex-row items-center space-x-1">
+          <View className="flex-row items-center space-x-1 mt-4">
             <Text className="font-bold">Press </Text>
             <View className="bg-gray-300 rounded-lg p-2 ">
               <Text className="font-bold">Add Split</Text>

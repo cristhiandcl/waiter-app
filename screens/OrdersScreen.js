@@ -75,6 +75,13 @@ const OrdersScreen = () => {
           <Text className="text-5xl font-extrabold text-center w-3/5">
             There are no Orders left
           </Text>
+          <View className="flex-row items-center space-x-1 mt-4">
+            <Text className="font-bold">Press </Text>
+            {/* <View className="bg-gray-300 rounded-lg p-2 "> */}
+            <ArrowLeftCircleIcon color="green" size={30} />
+            {/* </View> */}
+            <Text className="font-bold">to create a new order</Text>
+          </View>
         </View>
       ) : (
         <ScrollView className="space-y-8">{renderOrders}</ScrollView>
