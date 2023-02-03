@@ -12,12 +12,12 @@ import Dish from "../components/Dish";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestaurant } from "../features/restaurantSlice";
 import { emptyBasket, getBasketItems } from "../features/basketSlice";
-import { getOrders, modifyOrders } from "../features/ordersSlice";
+import { modifyOrders } from "../features/ordersSlice";
 import { XCircleIcon } from "react-native-heroicons/solid";
 
 const ModifyOrderScreen = () => {
   const {
-    params: { id },
+    params: { id, index },
   } = useRoute();
 
   const restaurant = useSelector(getRestaurant);
@@ -35,7 +35,7 @@ const ModifyOrderScreen = () => {
     dispatch(modifyOrders({ order: items, id }));
     dispatch(emptyBasket());
     navigation.goBack();
-    Alert.alert("Order", "Order Modified successfully");
+    Alert.alert("Order", `Order #${index} Modified successfully`);
   };
   const abortModifying = () => {
     dispatch(emptyBasket());

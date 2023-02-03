@@ -37,10 +37,10 @@ const OrdersScreen = () => {
     navigation.navigate("Basket", { id });
   };
 
-  const modifyOrder = (id) => {
+  const modifyOrder = (id, index) => {
     const order = orders.filter((order) => order.id === id)[0];
     console.log(id, order.order);
-    navigation.navigate("ModifyOrder", { id });
+    navigation.navigate("ModifyOrder", { id, index });
     dispatch(setBasket(order.order));
   };
 
@@ -53,7 +53,7 @@ const OrdersScreen = () => {
       <Text className="font-extrabold text-2xl text-white flex-1">
         Order #{index + 1}
       </Text>
-      <TouchableOpacity onPress={() => modifyOrder(order.id)}>
+      <TouchableOpacity onPress={() => modifyOrder(order.id, index + 1)}>
         <PencilSquareIcon color="black" size={40} />
       </TouchableOpacity>
     </TouchableOpacity>
