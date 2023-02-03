@@ -20,11 +20,18 @@ export const ordersSlice = createSlice({
     emptyOrders: (state) => {
       state.items = [];
     },
+    modifyOrders: (state, action) => {
+      const modifiedOrders = state.items.map((item) =>
+        item.id === action.payload.id ? action.payload : item
+      );
+      state.items = [...modifiedOrders];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addOrder, removeOrder, emptyOrders } = ordersSlice.actions;
+export const { addOrder, removeOrder, emptyOrders, modifyOrders } =
+  ordersSlice.actions;
 
 export const getOrders = (state) => state.orders.items;
 

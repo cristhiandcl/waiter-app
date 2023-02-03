@@ -39,25 +39,29 @@ const BasketScreen = () => {
   const [modal1Visible, setModal1Visible] = useState(false);
   const [modal2Visible, setModal2Visible] = useState(false);
   const [input, onChangeInput] = useState(0);
+  const splits = useSelector(getSplits);
 
   useEffect(() => {
     tip === "Other" && setModal2Visible(true);
     tip === "Other" && onChangeInput(0);
   }, [tip]);
 
-  const splits = useSelector(getSplits);
-  console.log("splitsBasket", splits);
-
   useMemo(() => {
+    const itemsArranged = [...items];
+    console.log("items", items);
     let individualItems = [],
       groupAllItems = [];
-    items?.map((_, index) => {
-      if (items[index]?.id === items[index + 1]?.id) {
-        individualItems.push(items[index]);
+    itemsArranged?.sort((r1, r2) =>
+      r1.id > r2.id ? 1 : r1.id < r2.id ? -1 : 0
+    );
+    console.log("Arranged", itemsArranged);
+    itemsArranged?.map((_, index) => {
+      if (itemsArranged[index]?.id === itemsArranged[index + 1]?.id) {
+        individualItems.push(itemsArranged[index]);
       } else {
         individualItems.length === 0
-          ? individualItems.push(items[index])
-          : individualItems.push(items[index - 1]);
+          ? individualItems.push(itemsArranged[index])
+          : individualItems.push(itemsArranged[index - 1]);
         groupAllItems.push(individualItems);
         individualItems = [];
       }
@@ -66,7 +70,7 @@ const BasketScreen = () => {
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
 
-  console.log(items);
+  // console.log(groupedItemsInBasket);
 
   const renderSplits = splits?.map((split, index) => (
     <View className="flex-row space-y-1">

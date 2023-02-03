@@ -16,11 +16,13 @@ import {
   ArrowLeftCircleIcon,
   PencilSquareIcon,
 } from "react-native-heroicons/solid";
+import { setBasket } from "../features/basketSlice";
 
 const OrdersScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const orders = useSelector(getOrders);
+  console.log("orders".orders);
 
   const sendToBasket = (id) => {
     dispatch(
@@ -36,7 +38,10 @@ const OrdersScreen = () => {
   };
 
   const modifyOrder = (id) => {
+    const order = orders.filter((order) => order.id === id)[0];
+    console.log(id, order.order);
     navigation.navigate("ModifyOrder", { id });
+    dispatch(setBasket(order.order));
   };
 
   const renderOrders = orders?.map((order, index) => (

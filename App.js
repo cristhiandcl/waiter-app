@@ -43,7 +43,7 @@ export default function App() {
           <Stack.Screen
             name="ModifyOrder"
             component={ModifyOrderScreen}
-            options={{ headerShown: false, presentation: "modal" }}
+            options={{ headerShown: false, presentation: "fullScreenModal" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
