@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import BasketScreen from "./screens/BasketScreen";
 import SplitAccountScreen from "./screens/SplitAccountScreen";
 import OrdersScreen from "./screens/OrdersScreen";
+import ModifyOrderScreen from "./screens/ModifyOrderScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -38,6 +39,11 @@ export default function App() {
             name="Orders"
             component={OrdersScreen}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ModifyOrder"
+            component={ModifyOrderScreen}
+            options={{ headerShown: false, presentation: "modal" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

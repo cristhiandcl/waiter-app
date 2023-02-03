@@ -35,7 +35,9 @@ const OrdersScreen = () => {
     navigation.navigate("Basket", { id });
   };
 
-  const modifyOrder = () => {};
+  const modifyOrder = (id) => {
+    navigation.navigate("ModifyOrder", { id });
+  };
 
   const renderOrders = orders?.map((order, index) => (
     <TouchableOpacity
@@ -46,7 +48,7 @@ const OrdersScreen = () => {
       <Text className="font-extrabold text-2xl text-white flex-1">
         Order #{index + 1}
       </Text>
-      <TouchableOpacity onPress={modifyOrder}>
+      <TouchableOpacity onPress={() => modifyOrder(order.id)}>
         <PencilSquareIcon color="black" size={40} />
       </TouchableOpacity>
     </TouchableOpacity>
