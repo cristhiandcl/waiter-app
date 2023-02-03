@@ -19,12 +19,11 @@ const ModifyOrderScreen = () => {
   const {
     params: { id },
   } = useRoute();
+
   const restaurant = useSelector(getRestaurant);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const items = useSelector(getBasketItems);
-  const orders = useSelector(getOrders);
-  console.log("orders", orders);
 
   const dishesToRender = restaurant.dishes.map((dish) => (
     <View key={dish.name}>
