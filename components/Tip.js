@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
-import { PencilIcon } from "react-native-heroicons/solid";
+import { PencilSquareIcon } from "react-native-heroicons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getTips, setTips } from "../features/tipsSlice";
 
@@ -41,7 +41,7 @@ const Tip = ({ tip }) => {
       ) : (
         <View className="flex-row space-x-1 items-center">
           <Text className="font-bold">{tip.value}</Text>
-          <PencilIcon size={15} color="green" />
+          <PencilSquareIcon size={16} color="green" />
         </View>
       )}
     </TouchableOpacity>

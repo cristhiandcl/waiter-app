@@ -12,7 +12,10 @@ import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
 import { setTips } from "../features/tipsSlice";
 import { emptySplits } from "../features/splitsSlice";
-import { ArrowLeftCircleIcon } from "react-native-heroicons/solid";
+import {
+  ArrowLeftCircleIcon,
+  PencilSquareIcon,
+} from "react-native-heroicons/solid";
 
 const OrdersScreen = () => {
   const navigation = useNavigation();
@@ -32,15 +35,20 @@ const OrdersScreen = () => {
     navigation.navigate("Basket", { id });
   };
 
+  const modifyOrder = () => {};
+
   const renderOrders = orders?.map((order, index) => (
     <TouchableOpacity
-      className="rounded-3xl p-10 mx-8 bg-green-600"
+      className="rounded-3xl p-10 mx-8 bg-green-600 flex-row items-center"
       onPress={() => sendToBasket(order.id)}
       key={uuid.v4()}
     >
-      <Text className="text-center font-extrabold text-2xl text-white">
+      <Text className="font-extrabold text-2xl text-white flex-1">
         Order #{index + 1}
       </Text>
+      <TouchableOpacity onPress={modifyOrder}>
+        <PencilSquareIcon color="black" size={40} />
+      </TouchableOpacity>
     </TouchableOpacity>
   ));
 
