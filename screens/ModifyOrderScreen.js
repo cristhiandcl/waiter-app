@@ -41,6 +41,7 @@ const ModifyOrderScreen = () => {
     dispatch(emptyBasket());
     navigation.goBack();
   };
+
   return (
     <SafeAreaView className="h-full relative">
       <TouchableOpacity

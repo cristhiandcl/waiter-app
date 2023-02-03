@@ -22,7 +22,6 @@ const OrdersScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const orders = useSelector(getOrders);
-  console.log("orders".orders);
 
   const sendToBasket = (id) => {
     dispatch(

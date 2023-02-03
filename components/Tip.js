@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { PencilSquareIcon } from "react-native-heroicons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getTips, setTips } from "../features/tipsSlice";

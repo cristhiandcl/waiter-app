@@ -1,5 +1,5 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import { restaurants } from "../restaurants";
 import { useNavigation } from "@react-navigation/core";
 

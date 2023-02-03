@@ -1,16 +1,7 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
-// import { TrashIcon } from "react-native-heroicons/solid";
-// import { removeFromBasket } from "../features/basketSlice";
-import { useDispatch } from "react-redux";
 
 const BasketItem = ({ item }) => {
-  const dispatch = useDispatch();
-
-  // const removeItemsFromBasket = () => {
-  //   dispatch(removeFromBasket(item[0].id));
-  // };
-
   return (
     <View className="flex-row justify-around items-center">
       <View className="w-2/4">
@@ -29,9 +20,6 @@ const BasketItem = ({ item }) => {
       </View>
       <View className="flex-row items-center space-x-2">
         <Text className="font-bold text-4xl text-green-600">{item.length}</Text>
-        {/* <TouchableOpacity onPress={removeItemsFromBasket}>
-          <TrashIcon size={28} color="green" />
-        </TouchableOpacity> */}
       </View>
     </View>
   );
