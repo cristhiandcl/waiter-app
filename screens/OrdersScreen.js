@@ -38,7 +38,6 @@ const OrdersScreen = () => {
 
   const modifyOrder = (id, index) => {
     const order = orders.filter((order) => order.id === id)[0];
-    console.log(id, order.order);
     navigation.navigate("ModifyOrder", { id, index });
     dispatch(setBasket(order.order));
   };
@@ -78,9 +77,7 @@ const OrdersScreen = () => {
           </Text>
           <View className="flex-row items-center space-x-1 mt-4">
             <Text className="font-bold">Press </Text>
-            {/* <View className="bg-gray-300 rounded-lg p-2 "> */}
             <ArrowLeftCircleIcon color="green" size={30} />
-            {/* </View> */}
             <Text className="font-bold">to create a new order</Text>
           </View>
         </View>

@@ -55,7 +55,7 @@ const RestaurantScreen = () => {
     </View>
   ));
 
-  const goToOrdersScreen = () => {
+  const createOrder = () => {
     (async () => {
       const id = uuid.v4();
       dispatch(addOrder({ order: items, id }));
@@ -90,7 +90,7 @@ const RestaurantScreen = () => {
       {itemsOnbasket > 0 && (
         <View className="mt-8">
           <TouchableOpacity
-            onPress={goToOrdersScreen}
+            onPress={createOrder}
             className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-3 justify-center"
           >
             <View className="bg-green-600 rounded p-2">

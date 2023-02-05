@@ -6,24 +6,32 @@ import {
   SafeAreaView,
   Alert,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Dish from "../components/Dish";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestaurant } from "../features/restaurantSlice";
 import { emptyBasket, getBasketItems } from "../features/basketSlice";
-import { modifyOrders } from "../features/ordersSlice";
+import { getOrders, modifyOrders } from "../features/ordersSlice";
 import { XCircleIcon } from "react-native-heroicons/solid";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
+import app from "../firebaseConfig";
+import { getAuth } from "firebase/auth";
+
+const db = getFirestore(app);
 
 const ModifyOrderScreen = () => {
   const {
     params: { id, index },
   } = useRoute();
-
+  const user = getAuth(app).currentUser;
   const restaurant = useSelector(getRestaurant);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const items = useSelector(getBasketItems);
+  const orders = useSelector(getOrders);
+
+  console.log(orders);
 
   const dishesToRender = restaurant.dishes.map((dish) => (
     <View key={dish.name}>
@@ -31,11 +39,17 @@ const ModifyOrderScreen = () => {
     </View>
   ));
 
-  const modifyOrder = () => {
+  useEffect(() => {
     dispatch(modifyOrders({ order: items, id }));
-    dispatch(emptyBasket());
+  }, [items.length]);
+
+  const modifyOrder = () => {
+    (async () => {
+      dispatch(emptyBasket());
+      await setDoc(doc(db, "users", user.uid), { orders }, { merge: true });
+      Alert.alert("Order", `Order #${index} Modified successfully`);
+    })();
     navigation.goBack();
-    Alert.alert("Order", `Order #${index} Modified successfully`);
   };
   const abortModifying = () => {
     dispatch(emptyBasket());
