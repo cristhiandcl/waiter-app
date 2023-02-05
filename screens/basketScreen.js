@@ -21,8 +21,20 @@ import uuid from "react-native-uuid";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { getOrders, removeOrder } from "../features/ordersSlice";
 import { emptySplits, getSplits } from "../features/splitsSlice";
+import { getAuth } from "firebase/auth";
+import app from "../firebaseConfig";
+import {
+  arrayRemove,
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
+
+const db = getFirestore(app);
 
 const BasketScreen = () => {
+  const user = getAuth(app).currentUser;
   const {
     params: { id },
   } = useRoute();
@@ -30,6 +42,7 @@ const BasketScreen = () => {
   const dispatch = useDispatch();
   const items = useSelector(getOrders)?.filter((order) => order.id === id)[0]
     ?.order;
+  const order = useSelector(getOrders)?.filter((order) => order.id === id)[0];
   const total = items?.reduce((prev, next) => prev + next.price, 0);
   const restaurant = useSelector(getRestaurant);
   const [groupedItemsInBasket, setGroupItemsInBasket] = useState();
@@ -114,10 +127,22 @@ const BasketScreen = () => {
   };
 
   const sendOrder = () => {
-    dispatch(removeOrder(id));
+    (async () => {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      dispatch(removeOrder(id));
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          orders: arrayRemove(order),
+        },
+        { merge: true }
+      );
+    })();
     Alert.alert("Order", "Order Finished Successfully");
     navigation.goBack();
   };
+
   return (
     <View className="h-full">
       <View className="flex-1">
