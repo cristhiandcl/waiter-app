@@ -45,12 +45,6 @@ const Login = () => {
       });
   };
 
-  // Create user with Email and Password
-  const createUser = () => {
-    console.log(userData);
-    navigation.navigate("SignIn");
-  };
-
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View
