@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Image, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { restaurants } from "../restaurants";
 import { useNavigation } from "@react-navigation/core";
@@ -9,7 +9,6 @@ const HomeScreen = () => {
   const restaurantTriggered = (id) => {
     navigation.navigate("Restaurant", { id });
   };
-
   const renderRestaurants = restaurants.map((restaurant) => (
     <TouchableOpacity
       onPress={() => restaurantTriggered(restaurant.id)}
