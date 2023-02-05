@@ -11,10 +11,8 @@ import React, { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import app from "../firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
-import { getFirestore } from "firebase/firestore";
 
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const Login = () => {
   useEffect(() => {}, []);
@@ -31,7 +29,6 @@ const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
         onChangeText({ email: "", password: "" });
         navigation.navigate("Home");
       })

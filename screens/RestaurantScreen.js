@@ -17,9 +17,13 @@ import { setTips } from "../features/tipsSlice";
 import { addOrder, getOrders } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
 import { WalletIcon } from "react-native-heroicons/solid";
-import axios from "axios";
+import { arrayUnion, doc, getFirestore, setDoc } from "firebase/firestore";
+import app from "../firebaseConfig";
+import { getAuth } from "firebase/auth";
 
+const db = getFirestore(app);
 const RestaurantScreen = () => {
+  const user = getAuth(app).currentUser;
   const {
     params: { id },
   } = useRoute();
@@ -52,9 +56,17 @@ const RestaurantScreen = () => {
   ));
 
   const goToOrdersScreen = () => {
-    dispatch(addOrder({ order: items, id: uuid.v4() }));
-    dispatch(emptyBasket());
-    Alert.alert("Order", "Order created successfully");
+    (async () => {
+      const id = uuid.v4();
+      dispatch(addOrder({ order: items, id }));
+      dispatch(emptyBasket());
+      await setDoc(
+        doc(db, "users", user.uid),
+        { orders: arrayUnion({ id, order: items }) },
+        { merge: true }
+      );
+      Alert.alert("Order", "Order created successfully");
+    })();
   };
 
   return (
