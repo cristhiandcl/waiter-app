@@ -8,6 +8,7 @@ import BasketScreen from "./screens/BasketScreen";
 import SplitAccountScreen from "./screens/SplitAccountScreen";
 import OrdersScreen from "./screens/OrdersScreen";
 import ModifyOrderScreen from "./screens/ModifyOrderScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,6 +16,11 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Home"
             component={HomeScreen}
