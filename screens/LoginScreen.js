@@ -3,7 +3,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
   Keyboard,
   Alert,
   TouchableWithoutFeedback,
@@ -94,14 +93,6 @@ const Login = () => {
             onPress={logUser}
           >
             <Text className="text-center font-bold text-white">Login</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="bg-blue-500 p-2 rounded"
-            onPress={createUser}
-          >
-            <Text className="text-center font-bold text-white">
-              Don't Have an Account ?
-            </Text>
           </TouchableOpacity>
         </View>
       </View>
