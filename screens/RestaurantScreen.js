@@ -4,6 +4,7 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/core";
@@ -13,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { emptyBasket, getBasketItems } from "../features/basketSlice";
 import { setRestaurant } from "../features/restaurantSlice";
 import { setTips } from "../features/tipsSlice";
-import { addOrder } from "../features/ordersSlice";
+import { addOrder, getOrders } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
+import { WalletIcon } from "react-native-heroicons/solid";
+import axios from "axios";
 
 const RestaurantScreen = () => {
   const {
@@ -24,6 +27,7 @@ const RestaurantScreen = () => {
   const dispatch = useDispatch();
   const itemsOnbasket = useSelector(getBasketItems).length;
   const items = useSelector(getBasketItems);
+  const orders = useSelector(getOrders);
 
   const restaurant = restaurants.filter(
     (restaurant) => restaurant.id === id
@@ -48,14 +52,22 @@ const RestaurantScreen = () => {
   ));
 
   const goToOrdersScreen = () => {
-    navigation.navigate("Orders");
     dispatch(addOrder({ order: items, id: uuid.v4() }));
     dispatch(emptyBasket());
+    Alert.alert("Order", "Order created successfully");
   };
 
   return (
-    <SafeAreaView className="h-full">
-      <Text className="text-center text-3xl font-extrabold text-green-800 mt-4">
+    <SafeAreaView className="h-full relative">
+      {orders?.length > 0 && (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Orders")}
+          className="absolute right-6 top-12"
+        >
+          <WalletIcon size={40} color="green" />
+        </TouchableOpacity>
+      )}
+      <Text className="text-center text-3xl font-extrabold text-green-800 mt-6">
         {restaurant.name}
       </Text>
       <View className={`mt-6 ${itemsOnbasket > 0 && "h-3/4"} py-3`}>

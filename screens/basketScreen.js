@@ -48,13 +48,11 @@ const BasketScreen = () => {
 
   useMemo(() => {
     const itemsArranged = [...items];
-    console.log("items", items);
     let individualItems = [],
       groupAllItems = [];
     itemsArranged?.sort((r1, r2) =>
       r1.id > r2.id ? 1 : r1.id < r2.id ? -1 : 0
     );
-    console.log("Arranged", itemsArranged);
     itemsArranged?.map((_, index) => {
       if (itemsArranged[index]?.id === itemsArranged[index + 1]?.id) {
         individualItems.push(itemsArranged[index]);
