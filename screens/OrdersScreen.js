@@ -42,8 +42,6 @@ const OrdersScreen = () => {
     dispatch(setBasket(order.order));
   };
 
-  console.log(orders);
-
   const renderOrders = orders?.map((order, index) => (
     <TouchableOpacity
       className="rounded-3xl p-10 mx-8 bg-green-600 flex-row items-center"

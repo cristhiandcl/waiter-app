@@ -31,8 +31,6 @@ const ModifyOrderScreen = () => {
   const items = useSelector(getBasketItems);
   const orders = useSelector(getOrders);
 
-  console.log(orders);
-
   const dishesToRender = restaurant.dishes.map((dish) => (
     <View key={dish.name}>
       <Dish dish={dish} />
