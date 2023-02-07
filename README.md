@@ -3,6 +3,10 @@
 
 This project was created with react native Expo CLI and styled with TailwindCss (NativeWind), this project has two parts, one running as the [client web app](https://github.com/cristhiandcl/waiter-client) and another running as the waiter mobile app (This one)
 
+The restaurant adquire the web, the mobile app and the login credentials, open the web client in the restaurant's computer and install the mobile app in the waiter's phone, the waiter create the order on the phone app, and this is sent to the web app so the restaurant can start preparing it and later on deliver it to the table. Once the order is finished, the waiter approach the table and generate the receipt with the mobile app (here the waiter can add a tip, shows the delivered order to the table and even split the order). Finally, when the order is finished, it's saved in the database to later get the history of daily, weekly or even monthly sales (on the web app).
+
+Send me a message to carrillocristhian2408@gmail.com if you want to have a trial.
+
 ## `Libraries`
 
 * react native
