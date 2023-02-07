@@ -25,6 +25,7 @@ import { getAuth } from "firebase/auth";
 import app from "../firebaseConfig";
 import {
   arrayRemove,
+  arrayUnion,
   doc,
   getDoc,
   getFirestore,
@@ -81,8 +82,6 @@ const BasketScreen = () => {
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
 
-  // console.log(groupedItemsInBasket);
-
   const renderSplits = splits?.map((split, index) => (
     <View className="flex-row space-y-1">
       <Text className="flex-1">Split {index + 1}</Text>
@@ -128,13 +127,13 @@ const BasketScreen = () => {
 
   const sendOrder = () => {
     (async () => {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
       dispatch(removeOrder(id));
+      const tipValue = tip === "Other" ? otherTip : tip;
       await setDoc(
         doc(db, "users", user.uid),
         {
           orders: arrayRemove(order),
+          history: arrayUnion({ order, tip: parseInt(tipValue) }),
         },
         { merge: true }
       );

@@ -57,6 +57,8 @@ const OrdersScreen = () => {
     </TouchableOpacity>
   ));
 
+  orders?.length === 0 && navigation.goBack();
+
   return (
     <SafeAreaView className="h-full relative">
       <Text className="font-extrabold text-4xl text-center text-green-800 mb-8 mt-4">
