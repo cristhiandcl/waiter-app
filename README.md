@@ -21,7 +21,7 @@ Send me a message to carrillocristhian2408@gmail.com if you want to have a trial
 * react-native-heroicons
 * react-native-uuid
 
-## `Login Credentials`
+## `Login Credentials (must have the mobile app)`
 
 - admin@gmail.com
 - administrator
