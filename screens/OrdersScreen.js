@@ -4,10 +4,11 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../features/ordersSlice";
+import { getOrders, removeOrder } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
 import { setTips } from "../features/tipsSlice";
@@ -15,13 +16,20 @@ import { emptySplits } from "../features/splitsSlice";
 import {
   ArrowLeftCircleIcon,
   PencilSquareIcon,
+  TrashIcon,
 } from "react-native-heroicons/solid";
 import { setBasket } from "../features/basketSlice";
+import { arrayRemove, doc, getFirestore, setDoc } from "firebase/firestore";
+import app from "../firebaseConfig";
+import { getAuth } from "firebase/auth";
+
+const db = getFirestore(app);
 
 const OrdersScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const orders = useSelector(getOrders);
+  const user = getAuth(app).currentUser;
 
   const sendToBasket = (id) => {
     dispatch(
@@ -42,13 +50,26 @@ const OrdersScreen = () => {
     dispatch(setBasket(order.order));
   };
 
+  const deleteOrder = async (order, index) => {
+    dispatch(removeOrder(order.id));
+    await setDoc(
+      doc(db, "users", user.uid),
+      { orders: arrayRemove(order) },
+      { merge: true }
+    );
+    Alert.alert("Order", `Order #${index + 1} Canceled successfully`);
+  };
+
   const renderOrders = orders?.map((order, index) => (
     <TouchableOpacity
-      className="rounded-3xl p-10 mx-8 bg-green-600 flex-row items-center"
+      className="rounded-3xl p-10 mx-6 bg-green-600 flex-row items-center justify-between"
       onPress={() => sendToBasket(order.id)}
       key={uuid.v4()}
     >
-      <Text className="font-extrabold text-2xl text-white flex-1">
+      <TouchableOpacity onPress={() => deleteOrder(order, index)}>
+        <TrashIcon color="red" size={40} />
+      </TouchableOpacity>
+      <Text className="font-extrabold text-2xl text-white">
         Order #{index + 1}
       </Text>
       <TouchableOpacity onPress={() => modifyOrder(order.id, index + 1)}>
