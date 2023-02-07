@@ -127,13 +127,22 @@ const BasketScreen = () => {
 
   const sendOrder = () => {
     (async () => {
+      const date = new Date();
+      let day = date.getDate();
+      let month = date.getMonth() + 1;
+      let year = date.getFullYear();
+
       dispatch(removeOrder(id));
       const tipValue = tip === "Other" ? otherTip : tip;
       await setDoc(
         doc(db, "users", user.uid),
         {
           orders: arrayRemove(order),
-          history: arrayUnion({ order, tip: parseInt(tipValue) }),
+          history: arrayUnion({
+            order,
+            tip: parseInt(tipValue),
+            date: `${day}-${month}-${year}`,
+          }),
         },
         { merge: true }
       );
