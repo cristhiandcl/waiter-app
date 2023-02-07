@@ -20,6 +20,7 @@ import { WalletIcon } from "react-native-heroicons/solid";
 import { arrayUnion, doc, getFirestore, setDoc } from "firebase/firestore";
 import app from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
+import * as Animatable from "react-native-animatable";
 
 const db = getFirestore(app);
 const RestaurantScreen = () => {
@@ -76,7 +77,9 @@ const RestaurantScreen = () => {
           onPress={() => navigation.navigate("Orders")}
           className="absolute right-6 top-12"
         >
-          <WalletIcon size={40} color="green" />
+          <Animatable.View animation="bounce">
+            <WalletIcon size={40} color="green" />
+          </Animatable.View>
         </TouchableOpacity>
       )}
       <Text className="text-center text-3xl font-extrabold text-green-800 mt-6">
