@@ -80,7 +80,7 @@ const RestaurantScreen = () => {
     if (orders?.length >= 1) {
       rotation.value = withSequence(
         withTiming(-10, { duration: 50 }),
-        withRepeat(withTiming(ANGLE, { duration: 100 }), 6, true),
+        withRepeat(withTiming(20, { duration: 100 }), 6, true),
         withTiming(0, { duration: 50 })
       );
     }
