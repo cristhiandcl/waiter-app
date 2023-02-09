@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  StyleSheet,
+  Button,
 } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/core";
@@ -21,6 +23,13 @@ import { arrayUnion, doc, getFirestore, setDoc } from "firebase/firestore";
 import app from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
 import * as Animatable from "react-native-animatable";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  withSequence,
+} from "react-native-reanimated";
 
 const db = getFirestore(app);
 const RestaurantScreen = () => {
@@ -68,7 +77,22 @@ const RestaurantScreen = () => {
       );
       Alert.alert("Order", "Order created successfully");
     })();
+    if (orders?.length >= 1) {
+      rotation.value = withSequence(
+        withTiming(-10, { duration: 50 }),
+        withRepeat(withTiming(ANGLE, { duration: 100 }), 6, true),
+        withTiming(0, { duration: 50 })
+      );
+    }
   };
+
+  const rotation = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotateZ: `${rotation.value}deg` }],
+    };
+  });
 
   return (
     <SafeAreaView className="h-full relative">
@@ -77,9 +101,11 @@ const RestaurantScreen = () => {
           onPress={() => navigation.navigate("Orders")}
           className="absolute right-6 top-12"
         >
-          <Animatable.View animation="bounce">
-            <WalletIcon size={40} color="green" />
-          </Animatable.View>
+          <Animated.View style={[animatedStyle]}>
+            <Animatable.View animation="bounce">
+              <WalletIcon size={40} color="green" />
+            </Animatable.View>
+          </Animated.View>
         </TouchableOpacity>
       )}
       <Text className="text-center text-3xl font-extrabold text-green-800 mt-6">
@@ -103,6 +129,22 @@ const RestaurantScreen = () => {
           </TouchableOpacity>
         </View>
       )}
+      {/* <View>
+        <Animated.View
+          style={[animatedStyle]}
+          className="h-28 bg-green-800 w-28 mx-auto rounded-xl mt-4 items-center justify-center"
+        >
+          <Text className="text-white font-extrabold">Reanimated</Text>
+        </Animated.View>
+        <View className="mt-4">
+          <Button
+            title="wobble"
+            onPress={() => {
+              rotation.value = withRepeat(withTiming(10), 4, true);
+            }}
+          />
+        </View>
+      </View> */}
     </SafeAreaView>
   );
 };
