@@ -28,9 +28,6 @@ Email me ( carrillocristhian2408@gmail.com ) if you want a trial.
 
 # App Demo
 
-Try to play both videos at the same time to watch almost synchronous
+https://user-images.githubusercontent.com/83930705/218180749-42f87ba8-8644-491d-be1f-368824652ab8.mp4
 
-https://user-images.githubusercontent.com/83930705/217311026-3fe1b914-0351-41a9-a719-ba59ad87eaaa.mov
-
-https://user-images.githubusercontent.com/83930705/217311181-e6c305bc-16ba-497f-b262-76a280e4de16.mov
 
