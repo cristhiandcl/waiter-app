@@ -26,8 +26,6 @@ const SplitsRendering = ({ split, index }) => {
     setGroupItemsInSplit(groupAllItems);
   }, []);
 
-  console.log("split", groupItemsInSplit);
-
   return (
     <View className="flex-row">
       <View className="flex-1 mb-2">
