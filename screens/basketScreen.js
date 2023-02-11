@@ -83,7 +83,7 @@ const BasketScreen = () => {
   }, [items]);
 
   const renderSplits = splits.map((split, index) => (
-    <SplitsRendering split={split} index={index} key={index} />
+    <SplitsRendering split={split} index={index} key={uuid.v4()} />
   ));
 
   const renderBasketItems = groupedItemsInBasket?.map((item) => (

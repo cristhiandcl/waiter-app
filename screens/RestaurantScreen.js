@@ -16,10 +16,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { emptyBasket, getBasketItems } from "../features/basketSlice";
 import { setRestaurant } from "../features/restaurantSlice";
 import { setTips } from "../features/tipsSlice";
-import { addOrder, getOrders } from "../features/ordersSlice";
+import { addOrder, getOrders, setOrders } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
 import { WalletIcon } from "react-native-heroicons/solid";
-import { arrayUnion, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
 import app from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
 import * as Animatable from "react-native-animatable";
@@ -57,6 +63,11 @@ const RestaurantScreen = () => {
         { value: "Other", isPressed: false, id: 3 },
       ])
     );
+    (async () => {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      dispatch(setOrders(docSnap.data().orders));
+    })();
   }, []);
 
   const dishesToRender = restaurant.dishes.map((dish) => (
@@ -75,7 +86,6 @@ const RestaurantScreen = () => {
         { orders: arrayUnion({ id, order: items }) },
         { merge: true }
       );
-      Alert.alert("Order", "Order created successfully");
     })();
     if (orders?.length >= 1) {
       rotation.value = withSequence(
@@ -84,6 +94,7 @@ const RestaurantScreen = () => {
         withTiming(0, { duration: 50 })
       );
     }
+    Alert.alert("Order", "Order created successfully");
   };
 
   const rotation = useSharedValue(0);

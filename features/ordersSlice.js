@@ -26,11 +26,14 @@ export const ordersSlice = createSlice({
       );
       state.items = [...modifiedOrders];
     },
+    setOrders: (state, action) => {
+      state.items = [...action.payload];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addOrder, removeOrder, emptyOrders, modifyOrders } =
+export const { addOrder, removeOrder, emptyOrders, modifyOrders, setOrders } =
   ordersSlice.actions;
 
 export const getOrders = (state) => state.orders.items;

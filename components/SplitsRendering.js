@@ -24,7 +24,7 @@ const SplitsRendering = ({ split, index }) => {
     });
 
     setGroupItemsInSplit(groupAllItems);
-  }, []);
+  }, [split]);
 
   return (
     <View className="flex-row">
