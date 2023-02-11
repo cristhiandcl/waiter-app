@@ -29,7 +29,7 @@ const SplitsRendering = ({ split, index }) => {
   return (
     <View className="flex-row">
       <View className="flex-1 mb-2">
-        <Text className="">Split {index + 1}</Text>
+        <Text className="">Split #{index + 1}</Text>
         <View className="my-1">
           {groupItemsInSplit?.map((spl) => (
             <View className="flex-row flex-1 space-x-1">
