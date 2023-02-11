@@ -35,7 +35,7 @@ const SplitAccountScreen = () => {
     Alert.alert("Split", "Split Added");
     order.length === 0 && navigation.goBack();
   };
-  console.log("splits", split);
+
   const renderItems = order?.map((item) => (
     <TouchableOpacity
       className="p-7 bg-green-600 rounded-full"
@@ -77,10 +77,11 @@ const SplitAccountScreen = () => {
       ) : (
         <ScrollView className="space-y-8">{renderItems}</ScrollView>
       )}
-      <TouchableOpacity className="p-6 bg-gray-300 mx-8 my-10 rounded-xl">
-        <Text className="text-center font-extrabold text-xl" onPress={addSplit}>
-          Add Split
-        </Text>
+      <TouchableOpacity
+        className="p-6 bg-gray-300 mx-8 my-10 rounded-xl"
+        onPress={addSplit}
+      >
+        <Text className="text-center font-extrabold text-xl">Add Split</Text>
       </TouchableOpacity>
     </View>
   );
