@@ -33,7 +33,7 @@ const SplitsRendering = ({ split, index }) => {
       <View className="flex-1 mb-2">
         <Text className="">Split {index + 1}</Text>
         <View className="my-1">
-          {groupItemsInSplit.map((spl) => (
+          {groupItemsInSplit?.map((spl) => (
             <View className="flex-row flex-1 space-x-1">
               <Text className="text-[10rem] font-extrabold">{spl[0].name}</Text>
               <Text className="text-[10rem] font-extrabold">x{spl.length}</Text>
@@ -50,7 +50,7 @@ const SplitsRendering = ({ split, index }) => {
             .format(split.reduce((prev, item) => prev + item.price, 0))
             .replace(",00", "")}
         </Text>
-        {groupItemsInSplit.map((spl) => (
+        {groupItemsInSplit?.map((spl) => (
           <Text className="text-[10rem] font-extrabold text-right">
             {new Intl.NumberFormat("es-CO", {
               style: "currency",
