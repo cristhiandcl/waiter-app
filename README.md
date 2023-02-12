@@ -18,6 +18,7 @@ Email me ( carrillocristhian2408@gmail.com ) if you want a trial.
 * tailwindcss
 * nativewind
 * react-native-animatable
+* react-native-reanimated
 * react-native-heroicons
 * react-native-uuid
 
