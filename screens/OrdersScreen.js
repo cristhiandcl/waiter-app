@@ -22,10 +22,12 @@ import { setBasket } from "../features/basketSlice";
 import { arrayRemove, doc, getFirestore, setDoc } from "firebase/firestore";
 import app from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const db = getFirestore(app);
 
 const OrdersScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const orders = useSelector(getOrders);
@@ -81,7 +83,10 @@ const OrdersScreen = () => {
   orders?.length === 0 && navigation.goBack();
 
   return (
-    <SafeAreaView className="h-full relative">
+    <View
+      className="h-full relative"
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+    >
       <Text className="font-extrabold text-4xl text-center text-green-800 mb-8 mt-4">
         Orders
       </Text>
@@ -105,7 +110,7 @@ const OrdersScreen = () => {
       ) : (
         <ScrollView className="space-y-8">{renderOrders}</ScrollView>
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

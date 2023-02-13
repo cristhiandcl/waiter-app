@@ -17,10 +17,12 @@ import { XCircleIcon } from "react-native-heroicons/solid";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 import app from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const db = getFirestore(app);
 
 const ModifyOrderScreen = () => {
+  const insets = useSafeAreaInsets();
   const {
     params: { id, index },
   } = useRoute();
@@ -55,7 +57,10 @@ const ModifyOrderScreen = () => {
   };
 
   return (
-    <SafeAreaView className="h-full relative">
+    <View
+      className="h-full relative"
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+    >
       <TouchableOpacity
         className="absolute top-12 left-4"
         onPress={abortModifying}
@@ -76,7 +81,7 @@ const ModifyOrderScreen = () => {
           <Text className="text-white font-extrabold">Modify Order</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

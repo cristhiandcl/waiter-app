@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-  Alert,
-  StyleSheet,
-  Button,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import { restaurants } from "../restaurants";
@@ -145,22 +136,6 @@ const RestaurantScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-      {/* <View>
-        <Animated.View
-          style={[animatedStyle]}
-          className="h-28 bg-green-800 w-28 mx-auto rounded-xl mt-4 items-center justify-center"
-        >
-          <Text className="text-white font-extrabold">Reanimated</Text>
-        </Animated.View>
-        <View className="mt-4">
-          <Button
-            title="wobble"
-            onPress={() => {
-              rotation.value = withRepeat(withTiming(10), 4, true);
-            }}
-          />
-        </View>
-      </View> */}
     </View>
   );
 };
