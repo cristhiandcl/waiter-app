@@ -36,9 +36,11 @@ import Animated, {
   withTiming,
   withSequence,
 } from "react-native-reanimated";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const db = getFirestore(app);
 const RestaurantScreen = () => {
+  const insets = useSafeAreaInsets();
   const user = getAuth(app).currentUser;
   const {
     params: { id },
@@ -106,11 +108,14 @@ const RestaurantScreen = () => {
   });
 
   return (
-    <SafeAreaView className="h-full relative">
+    <View
+      className="relative"
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+    >
       {orders?.length > 0 && (
         <TouchableOpacity
           onPress={() => navigation.navigate("Orders")}
-          className="absolute right-6 top-12"
+          className="absolute right-6 top-12 z-10"
         >
           <Animated.View style={[animatedStyle]}>
             <Animatable.View animation="bounce">
@@ -119,7 +124,7 @@ const RestaurantScreen = () => {
           </Animated.View>
         </TouchableOpacity>
       )}
-      <Text className="text-center text-3xl font-extrabold text-green-800 mt-6">
+      <Text className="text-center text-3xl font-extrabold text-green-800 -z-0 mt-3">
         {restaurant.name}
       </Text>
       <View className={`mt-6 ${itemsOnbasket > 0 && "h-3/4"} py-3`}>
@@ -156,7 +161,7 @@ const RestaurantScreen = () => {
           />
         </View>
       </View> */}
-    </SafeAreaView>
+    </View>
   );
 };
 
