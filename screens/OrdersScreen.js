@@ -16,6 +16,7 @@ import { arrayRemove, doc, getFirestore, setDoc } from "firebase/firestore";
 import app from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useEffect } from "react";
 
 const db = getFirestore(app);
 
@@ -73,7 +74,9 @@ const OrdersScreen = () => {
     </TouchableOpacity>
   ));
 
-  orders?.length === 0 && navigation.goBack();
+  useEffect(() => {
+    orders?.length === 0 && navigation.goBack();
+  }, [orders?.length]);
 
   return (
     <View
