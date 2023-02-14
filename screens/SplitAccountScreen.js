@@ -25,10 +25,6 @@ const SplitAccountScreen = () => {
     setOrder([...mirror]);
   };
 
-  // useEffect(() => {
-  //   order.length === 0 && console.log("empty");
-  // }, [order.length]);
-
   const addSplit = () => {
     dispatch(setSplits(split));
     setSplit([]);
