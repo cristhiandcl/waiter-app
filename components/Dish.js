@@ -36,10 +36,7 @@ const Dish = ({ dish }) => {
       </Text>
       <View className="flex-row items-center space-x-2">
         <TouchableOpacity onPress={removeItemsFromBasket}>
-          <MinusCircleIcon
-            size={30}
-            color={basketItems === 0 ? "gray" : "green"}
-          />
+          <MinusCircleIcon size={30} color={amount === 0 ? "gray" : "green"} />
         </TouchableOpacity>
         <Text>{amount}</Text>
         <TouchableOpacity onPress={addItemsToBasket}>
