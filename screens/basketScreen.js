@@ -81,6 +81,7 @@ const BasketScreen = () => {
 
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
+  console.log(splits);
 
   const renderSplits = splits.map((split, index) => (
     <SplitsRendering split={split} index={index} key={uuid.v4()} />
@@ -214,7 +215,9 @@ const BasketScreen = () => {
               className="p-4 w-2/4 bg-gray-200 rounded-2xl"
               onPress={goTosplitScreen}
             >
-              <Text className="text-center font-extrabold">Split Order</Text>
+              <Text className="text-center font-extrabold">
+                {splits.length === 0 ? "Split Order" : "Modify Split"}
+              </Text>
             </TouchableOpacity>
           </View>
           <Modal

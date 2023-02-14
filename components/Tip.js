@@ -7,7 +7,6 @@ import { getTips, setTips } from "../features/tipsSlice";
 const Tip = ({ tip, otherTip }) => {
   const tips = useSelector(getTips);
   const dispatch = useDispatch();
-  console.log(tip, otherTip);
 
   const pressed = () => {
     dispatch(
