@@ -81,7 +81,6 @@ const BasketScreen = () => {
 
     setGroupItemsInBasket(groupAllItems);
   }, [items]);
-  console.log(splits);
 
   const renderSplits = splits.map((split, index) => (
     <SplitsRendering split={split} index={index} key={uuid.v4()} />
