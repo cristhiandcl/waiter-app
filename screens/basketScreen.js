@@ -177,7 +177,7 @@ const BasketScreen = () => {
             </Text>
             <View className="flex-row justify-around mt-6">
               {tipValues?.map((tip, index) => (
-                <Tip tip={tip} key={index} />
+                <Tip tip={tip} key={index} otherTip={otherTip} />
               ))}
             </View>
           </View>

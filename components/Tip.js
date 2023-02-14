@@ -4,16 +4,20 @@ import { PencilSquareIcon } from "react-native-heroicons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getTips, setTips } from "../features/tipsSlice";
 
-const Tip = ({ tip }) => {
+const Tip = ({ tip, otherTip }) => {
   const tips = useSelector(getTips);
   const dispatch = useDispatch();
+  console.log(tip, otherTip);
 
   const pressed = () => {
     dispatch(
       setTips(
         tips.map((tipD) =>
           tipD.id === tip.id
-            ? { ...tipD, isPressed: !tip.isPressed }
+            ? {
+                ...tipD,
+                isPressed: true,
+              }
             : { ...tipD, isPressed: false }
         )
       )
@@ -40,7 +44,16 @@ const Tip = ({ tip }) => {
         </Text>
       ) : (
         <View className="flex-row space-x-1 items-center">
-          <Text className="font-bold">{tip.value}</Text>
+          <Text className="font-bold">
+            {otherTip === 0
+              ? tip.value
+              : new Intl.NumberFormat("es-CO", {
+                  style: "currency",
+                  currency: "COP",
+                })
+                  .format(otherTip)
+                  .replace(",00", "")}
+          </Text>
           <PencilSquareIcon size={16} color="green" />
         </View>
       )}

@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Alert } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders, removeOrder } from "../features/ordersSlice";
