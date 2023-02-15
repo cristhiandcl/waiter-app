@@ -1,4 +1,4 @@
-import { View, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
 import { client, urlFor } from "../sanity";
@@ -56,27 +56,11 @@ const HomeScreen = () => {
     navigation.navigate("Restaurant");
   };
 
-  // const renderRestaurants = restaurant?.map((restaurant) => (
-  //   <TouchableOpacity
-  //     onPress={() => restaurantTriggered(restaurant.id)}
-  //     key={restaurant.id}
-  //   >
-  //     <Image
-  //       source={{ uri: urlFor(restaurant.image).url() }}
-  //       className="h-60 w-60 rounded-lg"
-  //       style={{ resizeMode: "stretch" }}
-  //     />
-  //   </TouchableOpacity>
-  // ));
-
   return (
     <View
       className="items-center flex-1 justify-center"
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
-      {/* <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
-        {renderRestaurants}
-      </ScrollView> */}
       {restaurant && (
         <TouchableOpacity onPress={goToRestaurantScreen} key={restaurant.id}>
           <Image
