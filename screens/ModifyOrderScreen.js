@@ -67,13 +67,14 @@ const ModifyOrderScreen = () => {
       >
         <XCircleIcon size={50} color="green" />
       </TouchableOpacity>
-      <View className="mt-6 py-3">
-        <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
-          {dishesToRender}
-        </ScrollView>
-      </View>
+      <ScrollView
+        className="space-y-6 mt-16"
+        showsVerticalScrollIndicator={false}
+      >
+        {dishesToRender}
+      </ScrollView>
 
-      <View className="mt-2">
+      <View className="mt-4">
         <TouchableOpacity
           onPress={modifyOrder}
           className="p-4 items-center w-2/5 mx-auto bg-green-800 rounded-xl flex-row space-x-3 justify-center"

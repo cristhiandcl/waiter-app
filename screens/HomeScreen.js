@@ -35,8 +35,6 @@ const HomeScreen = () => {
       );
   }, []);
 
-  console.log(restaurants);
-
   const restaurantTriggered = (id) => {
     navigation.navigate("Restaurant", { id });
   };

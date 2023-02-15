@@ -31,6 +31,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import SplitsRendering from "../components/SplitsRendering";
+import { urlFor } from "../sanity";
 
 const db = getFirestore(app);
 
@@ -154,7 +155,7 @@ const BasketScreen = () => {
           >
             <View className="flex-1 flex-row items-center space-x-3">
               <Image
-                source={restaurant?.image}
+                source={{ uri: urlFor(restaurant?.image).url() }}
                 className="h-12 w-12 rounded-full"
                 style={{ resizeMode: "stretch" }}
               />
