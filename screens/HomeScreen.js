@@ -5,8 +5,10 @@ import { useNavigation } from "@react-navigation/core";
 import { client, urlFor } from "../sanity";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const HomeScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const [restaurantes, setRestaurantes] = useState([]);
 
@@ -18,11 +20,11 @@ const HomeScreen = () => {
       )
       .then((data) => setRestaurantes(data));
   }, []);
-  console.log(restaurantes);
+
   const restaurantTriggered = (id) => {
     navigation.navigate("Restaurant", { id });
   };
-  const renderRestaurants = restaurantes.map((restaurant) => (
+  const renderRestaurants = restaurantes?.map((restaurant) => (
     <TouchableOpacity
       onPress={() => restaurantTriggered(restaurant._id)}
       key={restaurant._id}
@@ -49,7 +51,10 @@ const HomeScreen = () => {
   // ));
 
   return (
-    <View className="mt-12 items-center">
+    <View
+      className="items-center"
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+    >
       <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
         {renderRestaurants}
       </ScrollView>
