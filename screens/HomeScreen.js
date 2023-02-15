@@ -25,7 +25,7 @@ const HomeScreen = () => {
     (async () => {
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
-      setRestaurantName(docSnap.data().restaurantName);
+      setRestaurantName(docSnap.data().restaurantName.toLowerCase());
     })();
     client
       .fetch(
