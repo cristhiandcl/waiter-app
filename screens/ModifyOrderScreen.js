@@ -27,7 +27,7 @@ const ModifyOrderScreen = () => {
     params: { id, index },
   } = useRoute();
   const user = getAuth(app).currentUser;
-  const restaurant = useSelector(getRestaurant);
+  const restaurant = useSelector(getRestaurant)[0];
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const items = useSelector(getBasketItems);

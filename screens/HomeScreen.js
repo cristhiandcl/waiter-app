@@ -5,18 +5,18 @@ import { client, urlFor } from "../sanity";
 import { useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
-import { getRestaurants, setRestaurants } from "../features/restaurantsSlice";
 import app from "../firebaseConfig";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
+import { getRestaurant, setRestaurant } from "../features/restaurantSlice";
 
 const db = getFirestore(app);
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const restaurant = useSelector(getRestaurants)[0];
+  const restaurant = useSelector(getRestaurant)[0];
   const dispatch = useDispatch();
   const user = getAuth(app).currentUser;
   const [restaurantName, setRestaurantName] = useState("");
@@ -34,7 +34,7 @@ const HomeScreen = () => {
       )
       .then((data) =>
         dispatch(
-          setRestaurants(
+          setRestaurant(
             data
               .map((restaurant) => ({
                 ...restaurant,
@@ -53,8 +53,8 @@ const HomeScreen = () => {
   }, [restaurantName]);
 
   console.log(restaurantName, restaurant);
-  const restaurantTriggered = (id) => {
-    navigation.navigate("Restaurant", { id });
+  const restaurantTriggered = () => {
+    navigation.navigate("Restaurant");
   };
 
   // const renderRestaurants = restaurant?.map((restaurant) => (
@@ -79,10 +79,7 @@ const HomeScreen = () => {
         {renderRestaurants}
       </ScrollView> */}
       {restaurant && (
-        <TouchableOpacity
-          onPress={() => restaurantTriggered(restaurant.id)}
-          key={restaurant.id}
-        >
+        <TouchableOpacity onPress={restaurantTriggered} key={restaurant.id}>
           <Image
             source={{ uri: urlFor(restaurant.image).url() }}
             className="h-60 w-60 rounded-lg"

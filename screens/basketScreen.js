@@ -46,7 +46,7 @@ const BasketScreen = () => {
     ?.order;
   const order = useSelector(getOrders)?.filter((order) => order.id === id)[0];
   const total = items?.reduce((prev, next) => prev + next.price, 0);
-  const restaurant = useSelector(getRestaurant);
+  const restaurant = useSelector(getRestaurant)[0];
   const [groupedItemsInBasket, setGroupItemsInBasket] = useState();
   const tipValues = useSelector(getTips);
   const tip = tipValues?.filter((tip) => tip.isPressed === true)[0]?.value || 0;

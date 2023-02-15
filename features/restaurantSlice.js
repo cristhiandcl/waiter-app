@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selected: {},
+  selected: [],
 };
 
 export const restaurantSlice = createSlice({
@@ -9,7 +9,7 @@ export const restaurantSlice = createSlice({
   initialState,
   reducers: {
     setRestaurant: (state, action) => {
-      state.selected = { ...action.payload };
+      state.selected = [...action.payload];
     },
   },
 });

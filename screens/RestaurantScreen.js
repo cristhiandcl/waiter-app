@@ -5,7 +5,7 @@ import { restaurants } from "../restaurants";
 import Dish from "../components/Dish";
 import { useDispatch, useSelector } from "react-redux";
 import { emptyBasket, getBasketItems } from "../features/basketSlice";
-import { setRestaurant } from "../features/restaurantSlice";
+import { getRestaurant, setRestaurant } from "../features/restaurantSlice";
 import { setTips } from "../features/tipsSlice";
 import { addOrder, getOrders, setOrders } from "../features/ordersSlice";
 import uuid from "react-native-uuid";
@@ -28,28 +28,19 @@ import Animated, {
   withSequence,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { getRestaurants } from "../features/restaurantsSlice";
 
 const db = getFirestore(app);
 const RestaurantScreen = () => {
   const insets = useSafeAreaInsets();
   const user = getAuth(app).currentUser;
-  const {
-    params: { id },
-  } = useRoute();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const itemsOnbasket = useSelector(getBasketItems).length;
   const items = useSelector(getBasketItems);
   const orders = useSelector(getOrders);
-  const restaurants = useSelector(getRestaurants);
-
-  const restaurant = restaurants?.filter(
-    (restaurant) => restaurant.id === id
-  )[0];
+  const restaurant = useSelector(getRestaurant)[0];
 
   useEffect(() => {
-    dispatch(setRestaurant(restaurant));
     dispatch(
       setTips([
         { value: 1000, isPressed: true, id: 0 },
