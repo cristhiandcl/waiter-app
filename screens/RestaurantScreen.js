@@ -28,6 +28,7 @@ import Animated, {
   withSequence,
 } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { getRestaurants } from "../features/restaurantsSlice";
 
 const db = getFirestore(app);
 const RestaurantScreen = () => {
@@ -41,8 +42,9 @@ const RestaurantScreen = () => {
   const itemsOnbasket = useSelector(getBasketItems).length;
   const items = useSelector(getBasketItems);
   const orders = useSelector(getOrders);
+  const restaurants = useSelector(getRestaurants);
 
-  const restaurant = restaurants.filter(
+  const restaurant = restaurants?.filter(
     (restaurant) => restaurant.id === id
   )[0];
 

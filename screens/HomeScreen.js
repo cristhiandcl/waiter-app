@@ -1,16 +1,17 @@
 import { View, Image, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
-import { restaurants } from "../restaurants";
 import { useNavigation } from "@react-navigation/core";
 import { client, urlFor } from "../sanity";
 import { useEffect } from "react";
-import { useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import { getRestaurants, setRestaurants } from "../features/restaurantsSlice";
 
 const HomeScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const [restaurantes, setRestaurantes] = useState([]);
+  const restaurants = useSelector(getRestaurants);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     client
@@ -18,16 +19,32 @@ const HomeScreen = () => {
         `*[_type == "restaurant"] {_id, description, name, rating, image,
           dishes[]->{description, name, image, price, _id}}`
       )
-      .then((data) => setRestaurantes(data));
+      .then((data) =>
+        dispatch(
+          setRestaurants(
+            data.map((restaurant) => ({
+              ...restaurant,
+              id: restaurant._id,
+              dishes: restaurant.dishes.map((dish) => ({
+                ...dish,
+                id: dish._id,
+              })),
+            }))
+          )
+        )
+      );
   }, []);
+
+  console.log(restaurants);
 
   const restaurantTriggered = (id) => {
     navigation.navigate("Restaurant", { id });
   };
-  const renderRestaurants = restaurantes?.map((restaurant) => (
+
+  const renderRestaurants = restaurants?.map((restaurant) => (
     <TouchableOpacity
-      onPress={() => restaurantTriggered(restaurant._id)}
-      key={restaurant._id}
+      onPress={() => restaurantTriggered(restaurant.id)}
+      key={restaurant.id}
     >
       <Image
         source={{ uri: urlFor(restaurant.image).url() }}
@@ -36,19 +53,6 @@ const HomeScreen = () => {
       />
     </TouchableOpacity>
   ));
-
-  // const renderRestaurants = restaurants.map((restaurant) => (
-  //   <TouchableOpacity
-  //     onPress={() => restaurantTriggered(restaurant.id)}
-  //     key={restaurant.id}
-  //   >
-  //     <Image
-  //       source={restaurant.image}
-  //       className="h-60 w-60 rounded-lg"
-  //       style={{ resizeMode: "stretch" }}
-  //     />
-  //   </TouchableOpacity>
-  // ));
 
   return (
     <View
