@@ -52,8 +52,7 @@ const HomeScreen = () => {
       );
   }, [restaurantName]);
 
-  console.log(restaurantName, restaurant);
-  const restaurantTriggered = () => {
+  const goToRestaurantScreen = () => {
     navigation.navigate("Restaurant");
   };
 
@@ -79,7 +78,7 @@ const HomeScreen = () => {
         {renderRestaurants}
       </ScrollView> */}
       {restaurant && (
-        <TouchableOpacity onPress={restaurantTriggered} key={restaurant.id}>
+        <TouchableOpacity onPress={goToRestaurantScreen} key={restaurant.id}>
           <Image
             source={{ uri: urlFor(restaurant.image).url() }}
             className="h-60 w-60 rounded-lg"
