@@ -101,7 +101,7 @@ const RestaurantScreen = () => {
 
   return (
     <View
-      className="relative"
+      className="relative h-full"
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
       {orders?.length > 0 && (
@@ -116,14 +116,12 @@ const RestaurantScreen = () => {
           </Animated.View>
         </TouchableOpacity>
       )}
-      <Text className="text-center text-3xl font-extrabold text-green-800 -z-0 mt-3">
+      <Text className="text-center text-3xl font-extrabold text-green-800 -z-0 pb-6">
         {restaurant.name}
       </Text>
-      <View className={`mt-6 ${itemsOnbasket > 0 && "h-3/4"} py-3`}>
-        <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
-          {dishesToRender}
-        </ScrollView>
-      </View>
+      <ScrollView className="space-y-6" showsVerticalScrollIndicator={false}>
+        {dishesToRender}
+      </ScrollView>
       {itemsOnbasket > 0 && (
         <View className="mt-8">
           <TouchableOpacity
