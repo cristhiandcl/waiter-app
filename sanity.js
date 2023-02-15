@@ -1,7 +1,7 @@
-import sanityClient from "@sanity/client";
+import SanityClient from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-const client = sanityClient({
+export const client = SanityClient({
   projectId: "edeo90s8",
   dataset: "production",
   useCdn: true,
@@ -11,4 +11,3 @@ const client = sanityClient({
 const builder = imageUrlBuilder(client);
 
 export const urlFor = (source) => builder.image(source);
-export default client;
