@@ -91,7 +91,6 @@ const RestaurantScreen = () => {
   };
 
   const rotation = useSharedValue(0);
-
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ rotateZ: `${rotation.value}deg` }],
