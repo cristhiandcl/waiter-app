@@ -11,9 +11,8 @@ const HomeScreen = () => {
   useEffect(() => {
     client
       .fetch(
-        `*[_type == "restaurant"] {...,
-          dishes[]->
-        }`
+        `*[_type == "restaurant"] {_id, description, name, rating,
+          dishes[]->{description, name, image, price, _id}}`
       )
       .then((data) => console.log(data));
 
