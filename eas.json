@@ -8,9 +8,14 @@
       "distribution": "internal",
       "channel": "development"
     },
-    "preview": {
+    "demo": {
       "distribution": "internal",
-      "channel": "preview"
+      "channel": "preview",
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleRelease"
+
+      }
     },
     "production": {
       "channel": "production"
