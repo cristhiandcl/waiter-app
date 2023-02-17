@@ -35,6 +35,7 @@ const SplitsRendering = ({ split, index }) => {
           {groupItemsInSplit?.map((spl) => (
             <View className="flex-row flex-1 space-x-1" key={uuid.v4()}>
               <Text className="text-[10rem] font-extrabold">{spl[0].name}</Text>
+              <Text className="text-[10rem] font-extrabold">|</Text>
               <Text className="text-[10rem] font-extrabold">x{spl.length}</Text>
             </View>
           ))}
