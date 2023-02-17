@@ -12,11 +12,13 @@ const BasketItem = ({ item }) => {
           style={{ resizeMode: "stretch" }}
         />
         <View className="w-2/4 space-y-1">
-          <Text className="font-extrabold text-xs">{item[0].name}</Text>
-          <Text className="font-semibold text-green-600 text-[8px]">
+          <Text className="font-extrabold text-justify text-xs">
+            {item[0].name}
+          </Text>
+          <Text className="font-semibold text-justify text-green-600 text-[8px]">
             {item[0].description}
           </Text>
-          <Text className="text-red-600 font-extrabold text-xs">
+          <Text className="text-red-600 text-justify font-extrabold text-xs">
             {new Intl.NumberFormat("es-CO", {
               style: "currency",
               currency: "COP",
