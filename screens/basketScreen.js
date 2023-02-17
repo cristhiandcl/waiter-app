@@ -249,7 +249,7 @@ const BasketScreen = () => {
           >
             <KeyboardAvoidingView behavior="padding" className="h-full">
               <View className="84 w-screen bg-green-200 rounded-t-3xl mt-auto pb-10">
-                <Text className="font-extrabold text-3xl mb-10 mt-6 ml-4 border border-gray-400">
+                <Text className="font-extrabold text-3xl mb-10 mt-6 ml-4 border-gray-400">
                   Enter Amount
                 </Text>
                 <TextInput
