@@ -31,7 +31,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.cristhiandcl.poxedex",
+      "package": "com.cristhiandcl.poxedex"
     },
     "web": {
       "favicon": "./assets/favicon.png"
