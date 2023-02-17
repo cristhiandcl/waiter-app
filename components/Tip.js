@@ -3,6 +3,8 @@ import React from "react";
 import { PencilSquareIcon } from "react-native-heroicons/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { getTips, setTips } from "../features/tipsSlice";
+import "intl";
+import "intl/locale-data/jsonp/es"; // Import the locales you need
 
 const Tip = ({ tip, otherTip }) => {
   const tips = useSelector(getTips);
