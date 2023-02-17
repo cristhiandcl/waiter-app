@@ -32,6 +32,8 @@ import {
 } from "firebase/firestore";
 import SplitsRendering from "../components/SplitsRendering";
 import { urlFor } from "../sanity";
+import "intl";
+import "intl/locale-data/jsonp/es"; // Import the locales you need
 
 const db = getFirestore(app);
 

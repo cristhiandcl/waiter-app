@@ -1,6 +1,8 @@
 import { View, Text } from "react-native";
 import React, { useMemo, useState } from "react";
 import uuid from "react-native-uuid";
+import "intl";
+import "intl/locale-data/jsonp/es"; // Import the locales you need
 
 const SplitsRendering = ({ split, index }) => {
   const [groupItemsInSplit, setGroupItemsInSplit] = useState();

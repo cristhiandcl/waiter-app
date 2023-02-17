@@ -1,6 +1,8 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
 import { urlFor } from "../sanity";
+import "intl";
+import "intl/locale-data/jsonp/es"; // Import the locales you need
 
 const BasketItem = ({ item }) => {
   return (

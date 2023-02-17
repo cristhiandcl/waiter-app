@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/ordersSlice";
 import { setSplits } from "../features/splitsSlice";
 import uuid from "react-native-uuid";
+import "intl";
+import "intl/locale-data/jsonp/es"; // Import the locales you need
 
 const SplitAccountScreen = () => {
   const {

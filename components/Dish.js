@@ -7,6 +7,8 @@ import {
   removeFromBasket,
 } from "../features/basketSlice";
 import { urlFor } from "../sanity";
+import "intl";
+import "intl/locale-data/jsonp/es"; // Import the locales you need
 
 const Dish = ({ dish }) => {
   const dispatch = useDispatch();
