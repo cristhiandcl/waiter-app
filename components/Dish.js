@@ -29,11 +29,11 @@ const Dish = ({ dish }) => {
         style={{ resizeMode: "stretch" }}
       />
       <View className="w-2/5 items-center space-y-1">
-        <Text className="font-extrabold text-xl">{dish.name}</Text>
-        <Text className="text-center font-semibold text-green-600">
+        <Text className="text-justify font-extrabold text-xl">{dish.name}</Text>
+        <Text className="text-justify font-semibold text-green-600">
           {dish.description}
         </Text>
-        <Text className="text-red-600 font-extrabold">
+        <Text className="text-red-600 font-extrabold text-justify">
           {new Intl.NumberFormat("es-CO", {
             style: "currency",
             currency: "COP",
