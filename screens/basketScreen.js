@@ -228,7 +228,7 @@ const BasketScreen = () => {
             visible={modal1Visible}
           >
             <View className="h-96 absolute bottom-0 w-screen bg-green-200 rounded-t-3xl">
-              <Text className="font-extrabold text-2xl mb-5 mt-6 ml-4 border border-gray-400">
+              <Text className="font-extrabold text-2xl mb-5 mt-6 ml-4 border-gray-400">
                 {restaurant?.name}
               </Text>
               <ScrollView className="space-y-4 mb-8">
