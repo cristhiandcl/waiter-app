@@ -10,7 +10,6 @@ import OrdersScreen from "./screens/OrdersScreen";
 import ModifyOrderScreen from "./screens/ModifyOrderScreen";
 import LoginScreen from "./screens/LoginScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import TestingFastAPI from "./screens/TestingFastAPI";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -52,11 +51,6 @@ export default function App() {
             <Stack.Screen
               name="ModifyOrder"
               component={ModifyOrderScreen}
-              options={{ headerShown: false, presentation: "fullScreenModal" }}
-            />
-            <Stack.Screen
-              name="TestingFastAPI"
-              component={TestingFastAPI}
               options={{ headerShown: false, presentation: "fullScreenModal" }}
             />
           </Stack.Navigator>
