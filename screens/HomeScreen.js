@@ -59,7 +59,7 @@ const HomeScreen = () => {
 
   const getDataFromFastAPI = () => {
     axios
-      .get("http://127.0.0.1:8000/items")
+      .get("http://localhost:8000/items")
       .then((response) => console.log(response.data))
       .catch((error) => console.error(error));
   };
