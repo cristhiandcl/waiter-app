@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
 import { client, urlFor } from "../sanity";
@@ -10,6 +10,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { getRestaurant, setRestaurant } from "../features/restaurantSlice";
+import axios from "axios";
 
 const db = getFirestore(app);
 
@@ -56,6 +57,13 @@ const HomeScreen = () => {
     navigation.navigate("Restaurant");
   };
 
+  const getDataFromFastAPI = () => {
+    axios
+      .get("http://127.0.0.1:8000/items")
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <View
       className="items-center flex-1 justify-center"
@@ -70,6 +78,12 @@ const HomeScreen = () => {
           />
         </TouchableOpacity>
       )}
+      <TouchableOpacity
+        className="bg-green-800 p-4 mt-4 rounded-xl"
+        onPress={getDataFromFastAPI}
+      >
+        <Text className="text-white font-extrabold">Get Data From FastAPI</Text>
+      </TouchableOpacity>
     </View>
   );
 };

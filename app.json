@@ -24,7 +24,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cristhiandcl.waiterapp"
+      "bundleIdentifier": "com.cristhiandcl.waiterapp",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
